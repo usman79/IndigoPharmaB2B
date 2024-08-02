@@ -1,0 +1,845 @@
+﻿@{
+    ViewData["Title"] = "Delivery Boy";
+}
+<div class="main-content">
+    <!-- Page Title Start -->
+    <div class="row">
+        <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-title-wrapper">
+                <div class="page-title-box ad-title-box-use">
+                    <h4 class="page-title">Delivery Boys</h4>
+                </div>
+                <div class="ad-breadcrumb">
+                    <ul>
+                        <li>
+                            <div class="ad-user-btn">
+                                <input class="form-control" type="text" placeholder="Search Here..." id="text-input">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+												s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+												c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+												s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                                </svg>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="add-group">
+                                <a class="ad-btn" onclick="OpenNewModel()">New Account</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table Start -->
+    <div class="row">
+        <!-- Styled Table Card-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card table-card">
+                <div class="card-header pb-0">
+                    <h4>Delivery Boys</h4>
+                </div>
+                <div class="card-body">
+                    <table id="dtDeliveryBoys" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Orders</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section AppModals{
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">New Account</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Firat Name</label>
+                                    <input required="required" id="UserFirstName" class="form-control required" type="text" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Last Name</label>
+                                    <input required="required" id="UserLastName" class="form-control required" type="text" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Email</label>
+                                    <input required="required" id="UserEmailAddress" class="form-control required" type="text" placeholder="Email Address">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Password</label>
+                                    <input required="required" id="UserPassword" class="form-control required" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Phone Number</label>
+                                    <input required="required" id="UserPhone" class="form-control required" type="text" placeholder="Phone Number">
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">Address</label>
+                                    <textarea required="required" id="Address" class="form-control required" type="text" placeholder="Address"></textarea>
+                                </div>
+                            </div>
+                            <input type="hidden" id="UserId" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveItem()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delivery Boy Orders</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="OrderUserId" />
+                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                        <div class="col-4">
+                            <label for="smStartDate">Start Date</label>
+                            <input type="date" class="form-control" id="smStartDate" placeholder="Start Date">
+                        </div>
+                        <div class="col-4">
+                            <label for="smEndDate">End Date</label>
+                            <input type="date" class="form-control" id="smEndDate" placeholder="End Date">
+                        </div>
+                        <div class="col-4 text-right">
+                            <button type="button" onclick="DatewiseOrderClick()" class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+                    <br />
+                    <table id="dtOrdersDate" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                        <thead>
+                            <tr>
+                                <th style="width:30%">User</th>
+                                <th style="width:20%">Status</th>
+                                <th style="width:20%">Date</th>
+                                <th style="width:20%">Amount</th>
+                                <th style="width:10%">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 text-right">
+                            <h4 class="mt-2">Total: Rs. <span id="totalAmount"></span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="updateDetailBtn" onclick="UpdateOrderDetails()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPaymentTitle">Payment</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="PaymentType" type="hidden" />
+                    //<input id="PaymentOrderId" type="hidden" />
+                    @*<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <label class="col-form-label">Amount</label>
+                                <input required="required" id="PaymentAmount" class="form-control required" type="text" placeholder="Amount">
+                            </div>
+                        </div>*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="updateDetailBtn" onclick="AddPayment()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalOrderProcess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPaymentTitle">Order Completion Wizard</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="orderWizardTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" disabled="disabled" id="returnTab" data-bs-toggle="tab" href="#tabReturn" role="tab" aria-controls="home" aria-selected="true">Return</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" disabled="disabled" id="paymentTab" data-bs-toggle="tab" href="#tabPayment" role="tab" aria-controls="profile" aria-selected="false">Payment</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content ad-content2">
+                        <div class="tab-pane fade active show" id="tabReturn" role="tabpanel">
+                            <input class="form-control" type="text" placeholder="Search Here..." id="text-input-return">
+                            <table id="dtOrderDetails" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:30%">Product</th>
+                                        <th style="width:15%">Quantity</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tabPayment" role="tabpanel">
+                            <input id="PaymentOrderId" type="hidden" />
+                            <div id="CheckDetails">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Cheque #</label>
+                                        <input required="required" id="ChequeNumber" class="form-control required" type="text" placeholder="Cheque Number">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Date</label>
+                                        <input required="required" id="ChequeDate" class="form-control required" type="date" placeholder="Date">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Bank Name</label>
+                                        <input required="required" id="ChequeBank" class="form-control required" type="text" placeholder="Bank Name">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Amount</label>
+                                        <input required="required" id="ChequeAmount" class="form-control required" type="text" placeholder="Amount">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="CashDetails" class="hide">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Payment</label>
+                                        <input required="required" id="PaymentAmount" class="form-control required" type="text" placeholder="Amount">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Expense</label>
+                                        <input required="required" id="ExpenseAmount" class="form-control required" type="text" placeholder="Amount">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="PerformPrevious()">Previous</button>
+                    <button type="button" class="btn btn-primary" id="nextTabButton" onclick="PerformNext()">Next</button>
+                    @*<button type="button" class="btn btn-primary" id="updateDetailBtn" onclick="AddPayment()">Update</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script>
+        var dtDeliveryBoys = null;
+        var dtOrdersToday = null;
+        var dtOrdersDate = null;
+        var dtOrderDetails = null;
+        var EditObject = null;
+
+        $(document).ready(function () {
+            LoadAll();
+             
+        });
+
+
+          $('#text-input-return').keyup(function () {
+                dtOrderDetails.search($(this).val()).draw();
+            });
+
+
+        function LoadAll() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/DeliveryBoy/GetAllDeliveryBoy',
+                success: function (data) {
+                    BindDataTable(data);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function BindDataTable(data) {
+            if (dtDeliveryBoys != null)
+                dtDeliveryBoys.destroy();
+            dtDeliveryBoys = $('#dtDeliveryBoys').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "UserId",
+                columns: [
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return row.UserFirstName + " " + row.UserLastName;
+                        }
+                    },
+                    {
+                        data: "UserEmailAddress",
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false
+                    },
+                    {
+                        data: "ActiveStatus",
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            var label = '';
+                            if (row.ActiveStatus == 1) {
+                                label = '<label class="mb-0 badge badge-success toltiped" data-bs-toggle="dropdown">Active</label>';
+                            }
+                            else {
+                                label = '<label class="mb-0 badge badge-danger toltiped" data-bs-toggle="dropdown">InActive</label>';
+                            }
+                            return '<div class="dropdown"> ' + label + ' <ul class="dropdown-menu"> <li><a class="dropdown-item" href="#" onclick="UpdateUserStatus(this,true)"><label class="mb-0 badge badge-success w-100">Active</label></a></li> <li><a class="dropdown-item" href="#" onclick="UpdateUserStatus(this,false)"><label class="mb-0 badge badge-danger w-100">InActive</label></a></li>  </ul> </div>';
+                        }
+                    },
+
+                    {
+                        "searchable": false,
+                        data: "Orders",
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var classBadge = 'badge-danger';
+                            if (row.Orders > 0) {
+                                classBadge = 'badge-success';
+                            }
+                            return '<label class="mb-0 badge badge-success toltiped" onclick="LoadOrderModal(' + row.UserId + ')" data-bs-toggle="dropdown">View</label>';
+                        }
+                    },
+                    {
+                        data: null,
+                        "searchable": false,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var html = '<div class="relative"><a class="action-btn" href="javascript:void(0);"> <svg class="default-size " viewBox="0 0 341.333 341.333 "> <g> <g> <g> <path d="M170.667,85.333c23.573,0,42.667-19.093,42.667-42.667C213.333,19.093,194.24,0,170.667,0S128,19.093,128,42.667 C128,66.24,147.093,85.333,170.667,85.333z "></path> <path d="M170.667,128C147.093,128,128,147.093,128,170.667s19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 S194.24,128,170.667,128z "></path> <path d="M170.667,256C147.093,256,128,275.093,128,298.667c0,23.573,19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 C213.333,275.093,194.24,256,170.667,256z "></path> </g> </g> </g> </svg> </a> <div class="action-option"> <ul> <li> <a onclick="EditItem(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Edit</a> </li> </ul> </div></div>';
+                            return html;
+                        }
+                    }
+                ]
+            });
+        }
+
+
+        function OpenNewModel() {
+            $('#UserId').val('');
+            $('#UserFirstName').val('');
+            $('#UserLastName').val('');
+            $('#UserEmailAddress').val('');
+            $('#UserPassword').val('');
+            $('#Address').val('');
+            $('#UserPhone').val('');
+
+            $("#exampleModalLong").modal("show");
+        }
+
+        function EditItem(element) {
+            var data = dtDeliveryBoys.row($(element).parents('tr')).data();
+            $('#UserId').val(data.UserId);
+            $('#UserFirstName').val(data.UserFirstName);
+            $('#UserLastName').val(data.UserLastName);
+            $('#UserEmailAddress').val(data.UserEmailAddress);
+            $('#UserPassword').val(data.UserPassword);
+            $('#Address').val(data.Address);
+            $('#UserPhone').val(data.UserPhone);
+
+            $("#exampleModalLong").modal("show");
+        }
+
+        function DeleteItem(id) {
+            var host = window.location;
+            $.ajax({
+                url: host.protocol + "//" + host.host + '/Brand/Delete?id=' + id,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                success: function (json) {
+                    LoadAll();
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function SaveItem() {
+            if (CheckRequired($('#userForm'))) {
+                var UserInfo = {
+                    UserId: $('#UserId').val(),
+                    UserFirstName: $('#UserFirstName').val(),
+                    UserLastName: $('#UserLastName').val(),
+                    UserEmailAddress: $('#UserEmailAddress').val(),
+                    UserPassword: $('#UserPassword').val(),
+                    UserPhone: $('#UserPhone').val(),
+                    Address: $('#Address').val()
+                };
+                var formData = new FormData();
+                formData.append('UserId', UserInfo.UserId);
+                formData.append('UserFirstName', UserInfo.UserFirstName);
+                formData.append('UserLastName', UserInfo.UserLastName);
+                formData.append('UserEmailAddress', UserInfo.UserEmailAddress);
+                formData.append('UserPassword', UserInfo.UserPassword);
+                formData.append('UserPhone', UserInfo.UserPhone);
+                formData.append('Address', UserInfo.Address);
+
+
+                $.ajax({
+                    url: '/DeliveryBoy/Save',
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (result) {
+                        $("#exampleModalLong").modal("hide");
+                        LoadAll();
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+            } else {
+                alert('Please fill all required fields!');
+            }
+        }
+
+        function CheckRequired($element) {
+            var $form = $element;
+
+            if ($form.find('.required').filter(function () { return this.value === '' }).length > 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function UpdateUserStatus(element, status) {
+            var dataUser = dtDeliveryBoys.row($(element).parents('tr')).data();
+            dataUser.ActiveStatus = status;
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/DeliveryBoy/UpdateStatus?UserId=' + dataUser.UserId + '&&Status=' + dataUser.ActiveStatus,
+                success: function (data) {
+                    if (data == true) {
+
+                        dtDeliveryBoys.row('#' + dataUser.UserId)
+                            .data(dataUser)
+                            .draw();
+                    }
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        //Order logic
+        function LoadOrderModal(UserId) {
+            let today = new Date().toLocaleDateString();
+            $('#OrderUserId').val(UserId);
+            LoadOrders(UserId, today, today, true);
+            var now = new Date();
+
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+            var todayFormat = now.getFullYear() + "-" + (month) + "-" + (day);
+            $("#smEndDate").attr("value", todayFormat);
+            $("#smStartDate").attr("value", todayFormat);
+            $('#orderModal').modal('show');
+        }
+        function DatewiseOrderClick() {
+            var UserId = $('#OrderUserId').val();
+            var startdate = $('#smStartDate').val();
+            var endDate = $('#smEndDate').val();
+            LoadOrders(UserId, startdate, endDate, false);
+        }
+
+        function LoadOrders(Id, StartDate, EndDate, Today) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Order/GetDeliveryBoyOrders?Id=' + Id + "&&StartDate=" + StartDate + "&&EndDate=" + EndDate,
+                success: function (data) {
+                    BindDatewiseOrder(data);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function BindDatewiseOrder(data) {
+            if (dtOrdersDate != null)
+                dtOrdersDate.destroy();
+            dtOrdersDate = $('#dtOrdersDate').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "OrderId",
+                rowCallback: function (row, data) {
+                    if (data.Status == 4) {
+                        $(row).addClass('complete');
+                    }
+                },
+                columns: [
+                    {
+                        data: "UserName",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="text-primary">' + row.UserName + '</div>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort complete-restriction",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var label = '';
+                            if (row.Status == 1) {
+                                label = '<label class="mb-0 badge badge-dark toltiped" data-bs-toggle="dropdown">Pending</label>';
+                            }
+                            else if (row.Status == 2) {
+                                label = '<label class="mb-0 badge badge-primary toltiped" data-bs-toggle="dropdown">Processing</label>';
+                            }
+                            else if (row.Status == 3) {
+                                label = '<label class="mb-0 badge badge-danger toltiped" data-bs-toggle="dropdown">Canceled</label>';
+                            }
+                            else {
+                                label = '<label class="mb-0 badge badge-success toltiped" data-bs-toggle="dropdown">Complete</label>';
+                            }
+                            return label;
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            if (row.CreatedAt != null) {
+                                var dateOriginal = new Date(row.CreatedAt);
+                                var formattedDate = moment(dateOriginal).format('DD MMM YYYY');
+                                return formattedDate;
+                            }
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort text-truncate",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var amount = row.TotalAmount - row.PaidAmount;
+                            return amount;
+                        }
+                    },
+                    {
+                        data: null,
+                        "searchable": false,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            //var html = '<div class="relative"><a class="action-btn" href="javascript:void(0);"> <svg class="default-size " viewBox="0 0 341.333 341.333 "> <g> <g> <g> <path d="M170.667,85.333c23.573,0,42.667-19.093,42.667-42.667C213.333,19.093,194.24,0,170.667,0S128,19.093,128,42.667 C128,66.24,147.093,85.333,170.667,85.333z "></path> <path d="M170.667,128C147.093,128,128,147.093,128,170.667s19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 S194.24,128,170.667,128z "></path> <path d="M170.667,256C147.093,256,128,275.093,128,298.667c0,23.573,19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 C213.333,275.093,194.24,256,170.667,256z "></path> </g> </g> </g> </svg> </a> <div class="action-option"> <ul><li> <a onclick="AddPaymentMenuClick(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Payment</a> </li><li> <a onclick="AddExpenseMenuClick(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Debit Expense</a> </li> <li> <a onclick="ViewDetails(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Return</a> </li> </ul> </div></div>';
+                            var html = '<label class="mb-0 badge badge-success toltiped" onclick="ViewDetails(this)" data-bs-toggle="dropdown">Process</label>';
+                            return html;
+                        }
+                    }
+                ]
+            });
+        }
+
+        function AddPaymentMenuClick(element, today = false) {
+            var dataOrder;
+            if (today) {
+                dataOrder = dtOrdersToday.row($(element).parents('tr')).data();
+            }
+            else {
+                dataOrder = dtOrdersDate.row($(element).parents('tr')).data();
+            }
+            SelectedOrderId = dataOrder.OrderId;
+            $('#PaymentOrderId').val(SelectedOrderId);
+            $('#PaymentType').val(2);
+            $('#PaymentAmount').val(0);
+            $('#modalPayment').modal('show');
+        }
+
+        function AddExpenseMenuClick(element, today = false) {
+            var dataOrder;
+            if (today) {
+                dataOrder = dtOrdersToday.row($(element).parents('tr')).data();
+            }
+            else {
+                dataOrder = dtOrdersDate.row($(element).parents('tr')).data();
+            }
+            SelectedOrderId = dataOrder.OrderId;
+            $('#PaymentOrderId').val(SelectedOrderId);
+            $('#PaymentType').val(3);
+            $('#PaymentAmount').val(0);
+            $('#modalPayment').modal('show');
+        }
+
+        function AddPayment() {
+            $('#modalPayment').modal('hide');
+            var SelectedOrderId = $('#PaymentOrderId').val();
+            var PaymentType = $('#PaymentType').val();
+            var PaymentAmount = $('#PaymentAmount').val();
+            if (PaymentAmount >= 0) {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Order/AddPayment?OrderId=' + SelectedOrderId + '&Payment=' + PaymentAmount + '&PaymentType=' + PaymentType,
+                    success: function (data) {
+                        LoadAll();
+                    },
+                    error: function (result) {
+                    }
+                });
+            }
+        }
+        var editingOrder = null;
+        function ViewDetails(element) {
+            var dataOrder = dtOrdersDate.row($(element).parents('tr')).data();
+            editingOrder = dataOrder;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/OrderDetail/GetByOrder?OrderId=' + dataOrder.OrderId,
+                success: function (data) {
+                    BindDetailsDataTable(data);
+                    console.log(editingOrder);
+                    if (editingOrder.PaymentType == 1) {
+                        $('#CheckDetails').addClass('hide');
+                        $('#CashDetails').removeClass('hide');
+                    }
+                    else if (editingOrder.PaymentType == 2) {
+                        $('#CheckDetails').removeClass('hide');
+                        $('#CashDetails').addClass('hide');
+                    }
+                    //if (dataOrder.Status == 4) {
+                    //    $('#updateDetailBtn').addClass('hide');
+                    //    $('#modalOrderProcess').addClass('complete');
+                    //}
+                    //else if (dataOrder.Status == 2) {
+                    //    $('#updateDetailBtn').addClass('hide');
+
+                    //}
+                    //else {
+
+                    //    $('#updateDetailBtn').removeClass('hide');
+                    //    $('#modalOrderProcess').removeClass('complete');
+                    //}
+                    $('#modalOrderProcess').modal('show');
+                    $('#PaymentAmount').val(0);
+                    $('#ExpenseAmount').val(0);
+                },
+                error: function (result) {
+                }
+            });
+        }
+        var detailObjCopy = null;
+
+        function BindDetailsDataTable(data) {
+            detailObjCopy = JSON.parse(JSON.stringify(data));
+            for (var element of data) {
+                element.Quantity = 0;
+            }
+            if (dtOrderDetails != null)
+                dtOrderDetails.destroy();
+            dtOrderDetails = $('#dtOrderDetails').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "OrderDetailId",
+                columns: [
+                    {
+                        data: "ProductName",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": true,
+                        render: function (data, type, row, meta) {
+                            return '<div class="text-primary">' + row.ProductName + '</div>';
+                        }
+                    },
+                    {
+                        //
+                        "searchable": false,
+                        data: "Quantity",
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '<button onclick="QuantityMinus(this)" type="button" class="btn btn-danger mr-2 icon-sm grid-quantity-control complete-restriction-hide"><i class="fas fa-minus"></i></button>' + row.Quantity + '<button onclick="QuantityAdd(this)" type="button" class="btn btn-primary ml-2 icon-sm grid-quantity-control complete-restriction-hide"><i class="fas fa-plus"></i></button>';
+                        }
+                    }
+                ]
+            });
+        }
+
+        function QuantityMinus(element) {
+            var data = dtOrderDetails.row($(element).parents('tr')).data();
+            if (data.Quantity > 0) {
+                data.Quantity--;
+            }
+            dtOrderDetails.row('#' + data.OrderDetailId)
+                .data(data)
+                .draw();
+        }
+
+        function QuantityAdd(element) {
+            var data = dtOrderDetails.row($(element).parents('tr')).data();
+            var filtered = detailObjCopy.filter(val => val.OrderDetailId == data.OrderDetailId);
+            if (filtered.length > 0) {
+                if (data.Quantity < filtered[0].Quantity) {
+                    data.Quantity++;
+                    dtOrderDetails.row('#' + data.OrderDetailId)
+                        .data(data)
+                        .draw();
+                }
+            }
+
+        }
+
+        function PerformPrevious() {
+            var selectedTab = $("ul#orderWizardTabs .nav-link.active").attr('id');
+            if (selectedTab == "paymentTab") {
+                $("ul#orderWizardTabs #returnTab").tab('show');
+                $('#nextTabButton').html('Next');
+            }
+        }
+        function PerformNext() {
+            var selectedTab = $("ul#orderWizardTabs .nav-link.active").attr('id');
+            if (selectedTab == "returnTab") {
+                $('#nextTabButton').html('Complete');
+                $("ul#orderWizardTabs #paymentTab").tab('show');
+            }
+            else if (selectedTab == "paymentTab") {
+                var ChequeDetails = {
+                    OrderId: editingOrder.OrderId,
+                    Status: 1,
+                    ChequeNumber: $('#ChequeNumber').val(),
+                    BankName: $('#ChequeBank').val(),
+                    Amount: $('#ChequeAmount').val(),
+                    Date: $('#ChequeDate').val()
+                };
+                var objProcessedOrder = {
+                    'returnDetails': dtOrderDetails.rows().data().toArray(),
+                    'OrderId': editingOrder.OrderId,
+                    'PaymentType': editingOrder.PaymentType,
+                    'Payment': $('#PaymentAmount').val(),
+                    'Expense': $('#ExpenseAmount').val(),
+                    'chequeDetail': ChequeDetails
+                };
+                $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: '/Order/SaveProcessedOrder',
+                    data: JSON.stringify(objProcessedOrder),
+                    success: function () {
+                        $('#modalOrderProcess').modal('hide');
+                        DatewiseOrderClick();
+                    },
+                    failure: function (response) {
+                        $('#result').html(response);
+                    },
+                    complete: function (data) {
+                        $('#modalOrderProcess').modal('hide');
+                        DatewiseOrderClick();
+                    }
+                });
+            }
+        }
+    </script>
+}

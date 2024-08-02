@@ -1,0 +1,717 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+}
+<div class="main-content">
+    <!-- Revanue Status Start -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h4 class="has-btn">Total Revanue <span><button type="button" class="btn btn-primary squer-btn sm-btn hide">Download</button></span></h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-12 col-md-12">
+                            <div class="chart-holder">
+                                <div id="chartD"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-12 col-md-12">
+                            <div class="revenue-wrapper">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="tab1-tab" data-bs-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Weekly</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="tab2-tab" data-bs-toggle="pill" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Monthly</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="tab3-tab" data-bs-toggle="pill" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Yearly</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                                        <div class="revenue-info-wrap">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><i class="far fa-chart-bar mr-2 icon-only"></i>Total Sales</td>
+                                                        <td>5995<sup class="medium ml-2 txt-green">+15%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-user-friends mr-2 icon-only"></i>Total Customers</td>
+                                                        <td>5894<sup class="medium ml-2 txt-green">+15%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-hand-holding-usd mr-2 icon-only"></i>Total Income</td>
+                                                        <td>4453<sup class="medium ml-2 txt-green">+25%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-signal mr-2 icon-only"></i>Total Expense</td>
+                                                        <td>7454<sup class="medium ml-2 txt-red">+2%</sup></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                        <div class="revenue-info-wrap">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><i class="far fa-chart-bar mr-2 icon-only"></i>Total Sales</td>
+                                                        <td>5995<sup class="medium ml-2 txt-green">+15%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-user-friends mr-2 icon-only"></i>Total Customers</td>
+                                                        <td>5894<sup class="medium ml-2 txt-green">+15%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-hand-holding-usd mr-2 icon-only"></i>Total Income</td>
+                                                        <td>4453<sup class="medium ml-2 txt-green">+25%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-signal mr-2 icon-only"></i>Total Expense</td>
+                                                        <td>7454<sup class="medium ml-2 txt-red">+2%</sup></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                                        <div class="revenue-info-wrap">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><i class="far fa-chart-bar mr-2 icon-only"></i>Total Sales</td>
+                                                        <td>5995<sup class="medium ml-2 txt-green">+15%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-user-friends mr-2 icon-only"></i>Total Customers</td>
+                                                        <td>5894<sup class="medium ml-2 txt-green">+15%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-hand-holding-usd mr-2 icon-only"></i>Total Income</td>
+                                                        <td>4453<sup class="medium ml-2 txt-green">+25%</sup></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="fas fa-signal mr-2 icon-only"></i>Total Expense</td>
+                                                        <td>7454<sup class="medium ml-2 txt-red">+2%</sup></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h4 class="card-title">Date Wise Reports</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="mfh-machine-profile">
+                            <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab1" data-bs-toggle="tab" href="#tabBalanceSheet" role="tab" aria-controls="home" aria-selected="true">Customer Ledger</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab20" data-bs-toggle="tab" href="#tabSalesman" role="tab" aria-controls="profile" aria-selected="false">Sales Man</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab20" data-bs-toggle="tab" href="#tabRider" role="tab" aria-controls="profile" aria-selected="false">Rider Report</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content ad-content2">
+                                <div class="tab-pane fade active show" id="tabBalanceSheet" role="tabpanel">
+                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="bsStartDate">Start Date</label>
+                                            <input type="date" class="form-control" id="bsStartDate" placeholder="Start Date">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="bsEndDate">End Date</label>
+                                            <input type="date" class="form-control" id="bsEndDate" placeholder="End Date">
+                                        </div>
+                                         <div class="col-3">
+                                            <label class="visually-hidden" for="Customer">Customer</label>
+                                            <select class="form-control" id="CustomerId"  ></select>
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" onclick="LoadDateWiseOrders()" class="btn btn-primary">View</button>
+                                        </div>
+                                    </form>
+                                    <table id="dtTransactions" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:5%"><div class="form-check"> <input name="select_all" class="form-check-input" type="checkbox" value="" id="example-select-all"></div></th>
+                                                <th style="width:20%">Date</th>
+                                                <th style="width:10%">Order#</th>
+                                                <th style="width:10%">Description</th>
+                                                <th style="width:15%">Debit</th>
+                                                <th style="width:10%">Credit</th>
+                                                <th style="width:10%">Balance</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="tabSalesman" role="tabpanel">
+                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="smStartDate">Start Date</label>
+                                            <input type="date" class="form-control" id="smStartDate" placeholder="Start Date">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="smEndDate">End Date</label>
+                                            <input type="date" class="form-control" id="smEndDate" placeholder="End Date">
+                                        </div>
+                                       <!--<div class="col-3">
+                                            <label class="visually-hidden" for="bsEndDate">Sales Man</label>
+                                            <select class="form-control" id="SalesmanId"></select>
+                                        </div>--> 
+                                        <div class="col-3">
+                                            <button type="button" onclick="LoadBySalesMan()" class="btn btn-primary">View</button>
+                                        </div>
+                                    </form>
+                                    <table id="dtSalesman" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:5%"><div class="form-check"> <input name="select_all" class="form-check-input" type="checkbox" value="" id="example-select-all"></div></th>
+                                                <th style="width:20%">SALESMAN</th>
+                                                <th style="width:15%"></th>
+                                                <th style="width:10%">SALES VALUE</th>
+                                                <th style="width:10%">NRV VALUE</th>
+                                                <th style="width:10%">DIFFERENCE</th>
+                                                <th style="width:10%">%GE</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                    <div class="tab-pane fade" id="tabRider" role="tabpanel">
+                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="smStartDate">Start Date</label>
+                                            <input type="date" class="form-control" id="smStartDate" placeholder="Start Date">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="smEndDate">End Date</label>
+                                            <input type="date" class="form-control" id="smEndDate" placeholder="End Date">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="visually-hidden" for="bsEndDate">Rider</label>
+                                            <select class="form-control" id="RiderId"></select>
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" onclick="LoadByRider()" class="btn btn-primary">View</button>
+                                        </div>
+                                    </form>
+                                    <table id="dtRider" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:3%"><div class="form-check"> <input name="select_all" class="form-check-input" type="checkbox" value="" id="example-select-all"></div></th>
+                                                <th style="width:7%">Inv#</th>
+                                                <th style="width:7%">C-Id</th>
+                                                <th style="width:14%">Pharmacy</th>
+                                                <th style="width:16%">Area</th>
+                                                <th style="width:9%">Total</th>
+                                                <th style="width:7%">Disc</th>
+                                                 <th style="width:7%">Return</th>
+                                                 <th style="width:7%">Cash</th>
+                                                 <th style="width:7%">Cheq</th>
+                                                  <th style="width:7%">Credit</th>
+                                                  <th style="width:9%">Balance</th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                 <td></td>
+                                                  <td></td>
+                                                   <td></td>
+                                                   <td></td>
+                                                 <td></td>
+                                                  <td> <button class="btn  " onclick=" OpenDiscountModal() "    >Add Disc</button></td>
+                                                   <td><button class="btn btn-primary"  >Add Return</button></td>
+                                                   <td><button class="btn btn-secondary">Add Cash</button></td>
+                                                 <td><button class="btn btn-warning">Add Cheq</button></td>
+                                                  <td><button class="btn btn-danger">Add Credit</button></td>
+                                                   <td></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="modal fade" id="addDiscountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDiscountModal">Discount</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="DiscountForm">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                <label for="SupplierId" class="col-form-label">Date</label>
+                                <input required="required" id="DiscountDate" type="date" >
+                                </div>
+                                 <div class="form-group">
+                                <label for="SupplierId" class="col-form-label">Discount #</label>
+                                <input required="required" id="DiscountNo" type="number" disabled="disabled" value="1235">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label">Pharmacy</label>
+                                    <input required="required" id="PharmacyName" class="form-control required" type="text" disabled="disabled" value="seven star">
+                                </div>
+                                 <label class="col-form-label">OrderTaker</label>
+                                    <input required="required" id="OrderTaker" class="form-control required" type="text" disabled="disabled" placeholder="Select" value="order taker 1">
+
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <label class="col-form-label">Amount</label>
+                                    <input required="required" id="DiscountAmount" class="form-control required" type="number" placeholder="Amount">
+                                
+                                   
+                                       
+
+                                    <label class="col-form-label">Category</label>
+                                    <select required="required" id="InventoryBatchNumber" class="form-control required" type="text" placeholder="Select">
+
+                                        </select>
+                                
+                            </div>
+                         
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                         <button type="button" class="btn btn-primary" onclick="SaveInventoryItem()">Save & Print</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveInventoryItem()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts{
+    <script src="~/Assets/js/apexchart/apexcharts.min.js"></script>
+    <script>
+        var dtTransactions = null;
+        var dtSalesman = null;
+        var MonthWiseOrders = @Html.Raw(Json.Serialize(@ViewBag.MonthWiseOrders));
+        $(document).ready(function () {
+            let months = MonthWiseOrders.map(a => a.Title);
+            let orders = MonthWiseOrders.map(a => a.Count);
+            chartD(months, orders);
+            LoadAllSalesMan();
+            LoadAllCustomer();
+        });
+
+        function chartD(months,orders) {
+
+            var options = {
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                    fontFamily: 'Poppins, sans-serif',
+                    toolbar: {
+                        show: false
+                    },
+                    zoom: {
+                        enabled: false
+                    },
+                },
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+                colors: ["#11a0fd"],
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return val;
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#10163a"],
+                        fontFamily: 'Poppins, sans-serif',
+                    }
+                },
+                series: [{
+                    name: 'Sales',
+                    data: orders
+                }],
+                xaxis: {
+                    categories: months,
+                    position: 'top',
+                    labels: {
+                        offsetY: -18,
+                        style: {
+                            colors: '#10163a',
+                            fontFamily: 'Poppins, sans-serif',
+                        }
+                    },
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    },
+                    crosshairs: {
+                        fill: {
+                            type: 'gradient',
+                            gradient: {
+                                colorFrom: '#11a0fd',
+                                colorTo: '#1b4962',
+                                stops: [0, 100],
+                                opacityFrom: 0.4,
+                                opacityTo: 0.5,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        offsetY: -35,
+
+                    }
+                },
+                fill: {
+                    gradient: {
+                        shade: 'light',
+                        type: "horizontal",
+                        shadeIntensity: 0.25,
+                        gradientToColors: undefined,
+                        inverseColors: true,
+                        opacityFrom: 1,
+                        opacityTo: 1,
+                        stops: [50, 0, 100, 100]
+                    },
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function (val) {
+                            return val;
+                        }
+                    }
+
+                },
+                title: {
+                    text: 'Monthly Sales',
+                    floating: true,
+                    offsetY: 320,
+                    align: 'center',
+                    style: {
+                        color: '#10163a',
+                        fontFamily: 'Poppins, sans-serif',
+                    }
+                },
+            }
+
+            var chart = new ApexCharts(
+                document.querySelector("#chartD"),
+                options
+            );
+
+            chart.render();
+
+        }
+
+        function LoadDateWiseOrders() {
+            var StartDate = $('#bsStartDate').val();
+            var EndDate = $('#bsEndDate').val();
+            var CustomerId = $('#CustomerId').val();
+            if (StartDate != null && EndDate != null && StartDate != "" && EndDate != ""&& CustomerId != null && CustomerId != "") {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Transaction/DateWiseOrders?StartDate=' + StartDate + '&&EndDate=' + EndDate + '&&UserId=' + CustomerId,
+                    success: function (data) {
+                        BindDataTable(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            }
+        }
+
+        function BindDataTable(data) {
+            if (dtTransactions != null)
+                dtTransactions.destroy();
+            dtTransactions = $('#dtTransactions').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "TransactionId",
+                columns: [
+                    {
+                        data: null,
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="form-check"> <input class="form-check-input" type="checkbox" name="id[]" value="' + $('<div/>').text(row.OrderId).html() + '"> </div>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            if (row.CreatedAt != null) {
+                                var dateOriginal = new Date(row.CreatedAt);
+                                var formattedDate = moment(dateOriginal).format('DD MMM YYYY');
+                                return formattedDate;
+                            }
+                        }
+                    },
+                    {
+                        data: "OrderId",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="text-primary">' + row.OrderId + '</div>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort complete-restriction",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var label = '';
+                            if (row.TransactionTypeId == 1) {
+                                label = 'SALE BASE';
+                            }
+                            else if (row.TransactionTypeId == 2) {
+                                label = 'CASH';
+                            }
+                            else if (row.TransactionTypeId == 3) {
+                                label = 'Expense';
+                            }
+                            return label;
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var label = '-';
+                            if (row.TransactionTypeId == 1) {
+                                label = row.TotalAmount;
+                            }
+                            return label;
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var label = '-';
+                            if (row.TransactionTypeId == 2 |row.TransactionTypeId==3) {
+                                label = row.TotalAmount;
+                            }
+                            return label;
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: "Balance",
+                        class: "no-sort text-truncate",
+                        "orderable": false
+                    }
+                ]
+            });
+        }
+
+        function LoadAllSalesMan() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/OrderTaker/GetAllOrderTakers',
+                success: function (data) {
+                    data.forEach(function (entry) {
+                        $('#SalesmanId').append('<option value="' + entry.UserId + '">' + entry.UserFirstName + " " + entry.UserLastName + '</option>')
+                    });
+                    $('#SalesmanId').select2({
+                        placeholder: "Select a SalesMan"
+                    });
+                    $("#SalesmanId").val('').trigger('change');
+                },
+                error: function (result) {
+                    $('#SalesmanId').select2({
+                        placeholder: "Select a Supplier"
+                    });
+                }
+            });
+        }
+         function LoadAllCustomer() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/UserAccount/GetAllCustomer',
+                success: function (data) {
+                    if (data != null) {
+                        data.forEach(function (entry) {
+                            $('#CustomerId').append('<option value="' + entry.UserId + '">' + entry.UserFirstName + " " + entry.UserLastName + '</option>')
+                        });
+                    }
+                    $('#CustomerId').select2({
+                        placeholder: "Select a Customer"
+                    });
+                    $("#CustomerId").val('').trigger('change');
+                },
+                error: function (result) {
+                    $('#CustomerId').select2({
+                        placeholder: "Select a Supplier"
+                    });
+                }
+            });
+        }
+
+        function LoadBySalesMan() {
+            var StartDate = $('#smStartDate').val();
+            var EndDate = $('#smEndDate').val();
+            //var SalesmanId = $('#SalesmanId').val();
+            if (StartDate != null && EndDate != null && StartDate != "" && EndDate != "") {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",//UserId=' + SalesmanId+'
+                    url: '/Reports/DateWiseOrders?StartDate=' + StartDate + '&&EndDate=' + EndDate,
+                    success: function (data) {
+                        BindSalesmanWiseDataTable(data);
+                    },
+                    error: function (result) {
+                    }
+                });
+            }
+        }
+
+        function BindSalesmanWiseDataTable(data) {
+            if (dtSalesman != null)
+                dtSalesman.destroy();
+            dtSalesman = $('#dtSalesman').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                columns: [
+                    {
+                        data: null,
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="form-check"> <input class="form-check-input" type="checkbox" name="id[]" value="' + $('<div/>').text(row.OrderId).html() + '"> </div>';
+                        }
+                    },
+                    {
+                        data: "OrderId",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="text-primary">' + row.Name + '</div>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '<p>SALES:</p><p>RETURNS:</p><p>NET TOTAL:</p>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort complete-restriction",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '<p>' + row.SalesAmount.toFixed(2) + '</p><p>' + row.ReturnSalesAmount.toFixed(2) + '</p><p>' + (row.SalesAmount - row.ReturnSalesAmount).toFixed(2) +'</p>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '<p>' + row.PurchaseAmount.toFixed(2) + '</p><p>' + row.ReturnPurchaseAmount.toFixed(2) + '</p><p>' + (row.PurchaseAmount - row.ReturnPurchaseAmount).toFixed(2) + '</p>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var saleDiff = row.SalesAmount - row.PurchaseAmount;
+                            var saleRetDiff = row.ReturnSalesAmount - row.ReturnPurchaseAmount;
+                            var saleNet = row.SalesAmount - row.ReturnSalesAmount;
+                            var purchaseNet = row.PurchaseAmount - row.ReturnPurchaseAmount;
+                            var netDiff = saleNet - purchaseNet;
+                            return '<p>' + saleDiff.toFixed(2) + '</p><p>' + saleRetDiff.toFixed(2) + '</p><p>' + netDiff.toFixed(2) + '</p>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort text-truncate",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '';
+                        }
+                    }
+                ]
+            });
+        }
+
+         function OpenDiscountModal() {
+             
+            $("#addDiscountModal").modal("show");
+        }
+
+    </script>
+}

@@ -1,0 +1,152 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>47c2f662-b5e4-4bdc-851a-b80a125cd055</UserSecretsId>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Assets\css\auth.css" />
+    <None Include="wwwroot\Assets\css\bootstrap.min.css" />
+    <None Include="wwwroot\Assets\css\calender.css" />
+    <None Include="wwwroot\Assets\css\datatables.css" />
+    <None Include="wwwroot\Assets\css\font-awesome.min.css" />
+    <None Include="wwwroot\Assets\css\fonts.css" />
+    <None Include="wwwroot\Assets\css\icofont.min.css" />
+    <None Include="wwwroot\Assets\css\images\ui-icons_444444_256x240.html" />
+    <None Include="wwwroot\Assets\css\images\ui-icons_555555_256x240.html" />
+    <None Include="wwwroot\Assets\css\images\ui-icons_777620_256x240.html" />
+    <None Include="wwwroot\Assets\css\images\ui-icons_777777_256x240.html" />
+    <None Include="wwwroot\Assets\css\images\ui-icons_cc0000_256x240.html" />
+    <None Include="wwwroot\Assets\css\images\ui-icons_ffffff_256x240.html" />
+    <None Include="wwwroot\Assets\css\jqvmap.min.css" />
+    <None Include="wwwroot\Assets\css\nice-select.css" />
+    <None Include="wwwroot\Assets\css\range.css" />
+    <None Include="wwwroot\Assets\css\style.css" />
+    <None Include="wwwroot\Assets\css\swiper.min.css" />
+    <None Include="wwwroot\Assets\css\theme.css" />
+    <None Include="wwwroot\Assets\fonts\ico-font\icofont.woff" />
+    <None Include="wwwroot\Assets\fonts\ico-font\icofont.woff2" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-brands-400.eot" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-brands-400.ttf" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-brands-400.woff" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-brands-400d41d.eot" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-regular-400.eot" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-regular-400.ttf" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-regular-400.woff" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-regular-400d41d.eot" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-solid-900.eot" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-solid-900.ttf" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-solid-900.woff" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\Assets\fonts\webfonts\fa-solid-900d41d.eot" />
+    <None Include="wwwroot\Assets\images\auth-bg.png" />
+    <None Include="wwwroot\Assets\images\auth-img1.png" />
+    <None Include="wwwroot\Assets\images\backgroundshape.png" />
+    <None Include="wwwroot\Assets\images\carousal1.jpg" />
+    <None Include="wwwroot\Assets\images\carousal2.jpg" />
+    <None Include="wwwroot\Assets\images\carousal3.jpg" />
+    <None Include="wwwroot\Assets\images\carousal4.jpg" />
+    <None Include="wwwroot\Assets\images\carousal5.jpg" />
+    <None Include="wwwroot\Assets\images\carousal6.jpg" />
+    <None Include="wwwroot\Assets\images\carousal7.jpg" />
+    <None Include="wwwroot\Assets\images\carousal8.jpg" />
+    <None Include="wwwroot\Assets\images\carousal9.jpg" />
+    <None Include="wwwroot\Assets\images\dark.png" />
+    <None Include="wwwroot\Assets\images\error.png" />
+    <None Include="wwwroot\Assets\images\favicon.png" />
+    <None Include="wwwroot\Assets\images\happy-striker.png" />
+    <None Include="wwwroot\Assets\images\light.png" />
+    <None Include="wwwroot\Assets\images\loader.gif" />
+    <None Include="wwwroot\Assets\images\logo.png" />
+    <None Include="wwwroot\Assets\images\logo2.png" />
+    <None Include="wwwroot\Assets\images\mini_logo.png" />
+    <None Include="wwwroot\Assets\images\o_icon.png" />
+    <None Include="wwwroot\Assets\images\o_icon2.png" />
+    <None Include="wwwroot\Assets\images\o_icon3.png" />
+    <None Include="wwwroot\Assets\images\product.png" />
+    <None Include="wwwroot\Assets\images\product2.png" />
+    <None Include="wwwroot\Assets\images\product3.png" />
+    <None Include="wwwroot\Assets\images\product4.png" />
+    <None Include="wwwroot\Assets\images\product\p1.png" />
+    <None Include="wwwroot\Assets\images\product\p2.png" />
+    <None Include="wwwroot\Assets\images\product\p3.png" />
+    <None Include="wwwroot\Assets\images\product\p4.png" />
+    <None Include="wwwroot\Assets\images\product\p5.png" />
+    <None Include="wwwroot\Assets\images\product\p6.png" />
+    <None Include="wwwroot\Assets\images\product\p7.png" />
+    <None Include="wwwroot\Assets\images\product\p8.png" />
+    <None Include="wwwroot\Assets\images\sad.png" />
+    <None Include="wwwroot\Assets\images\sort_asc.png" />
+    <None Include="wwwroot\Assets\images\sort_asc_disabled.png" />
+    <None Include="wwwroot\Assets\images\sort_both.png" />
+    <None Include="wwwroot\Assets\images\sort_desc.png" />
+    <None Include="wwwroot\Assets\images\sort_desc_disabled.png" />
+    <None Include="wwwroot\Assets\images\table\1.jpg" />
+    <None Include="wwwroot\Assets\images\table\2.jpg" />
+    <None Include="wwwroot\Assets\images\table\3.jpg" />
+    <None Include="wwwroot\Assets\images\table\4.jpg" />
+    <None Include="wwwroot\Assets\images\table\7.jpg" />
+    <None Include="wwwroot\Assets\images\table\pro1.jpg" />
+    <None Include="wwwroot\Assets\images\table\pro2.jpg" />
+    <None Include="wwwroot\Assets\images\table\pro3.jpg" />
+    <None Include="wwwroot\Assets\images\thumb1.png" />
+    <None Include="wwwroot\Assets\images\thumb2.png" />
+    <None Include="wwwroot\Assets\images\thumb3.png" />
+    <None Include="wwwroot\Assets\images\thumb4.png" />
+    <None Include="wwwroot\Assets\images\user.jpg" />
+    <None Include="wwwroot\Assets\images\user1.png" />
+    <None Include="wwwroot\Assets\images\user2.png" />
+    <None Include="wwwroot\Assets\images\user3.jpg" />
+    <None Include="wwwroot\Assets\images\user4.jpg" />
+    <None Include="wwwroot\Assets\js\apexchart\apexcharts.min.js" />
+    <None Include="wwwroot\Assets\js\apexchart\control-chart-apexcharts.js" />
+    <None Include="wwwroot\Assets\js\bootstrap.min.js" />
+    <None Include="wwwroot\Assets\js\calendar.min.js" />
+    <None Include="wwwroot\Assets\js\custom.js" />
+    <None Include="wwwroot\Assets\js\datatables.min.js" />
+    <None Include="wwwroot\Assets\js\dataTables.responsive.min.js" />
+    <None Include="wwwroot\Assets\js\jquery.appear.js" />
+    <None Include="wwwroot\Assets\js\jquery.countTo.js" />
+    <None Include="wwwroot\Assets\js\jquery.min.js" />
+    <None Include="wwwroot\Assets\js\jquery.vmap.min.js" />
+    <None Include="wwwroot\Assets\js\jquery.vmap.sampledata.js" />
+    <None Include="wwwroot\Assets\js\jquery.vmap.world.js" />
+    <None Include="wwwroot\Assets\js\nice-select.min.js" />
+    <None Include="wwwroot\Assets\js\popper.min.js" />
+    <None Include="wwwroot\Assets\js\range.js" />
+    <None Include="wwwroot\Assets\js\script.js" />
+    <None Include="wwwroot\Assets\js\swiper.min.js" />
+    <None Include="wwwroot\Assets\js\tag.js" />
+    <None Include="wwwroot\Assets\js\tagging.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.25" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Filters\" />
+  </ItemGroup>
+
+</Project>

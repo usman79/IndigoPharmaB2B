@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IndigoAdmin</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+    <!--Start Style -->
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/datatables.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/bootstrap.min.css">
+    <link href="~/Assets/fonts/fontawesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/icofont.min.css">
+    <link rel="stylesheet" id="theme-change" type="text/css" href="#">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/style.css?v=1">
+    <!-- Favicon Link -->
+    <link rel="shortcut icon" type="image/png" href="~/Assets/images/favicon.png">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner">
+            <img src="assets/images/loader.gif" alt="" />
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Header Start -->
+        <header class="header-wrapper main-header">
+            <div class="header-inner-wrapper">
+                <div class="header-right">
+                    <div class="serch-wrapper">
+                        <form>
+                            <input type="text" placeholder="Search Here...">
+                        </form>
+                        <a class="search-close" href="javascript:void(0);"><span class="icofont-close-line"></span></a>
+                    </div>
+                    <div class="header-left">
+                        <div class="header-links">
+                            <a href="javascript:void(0);" class="toggle-btn">
+                                <span></span>
+                            </a>
+                        </div>
+                        <div class="header-links search-link">
+                            <a class="search-toggle" href="javascript:void(0);">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
+                                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+                                    s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+                                    c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+                                    s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-controls">
+
+                        <div class="notification-wrapper header-links">
+                            <a href="javascript:void(0);" class="notification-info">
+                                <span class="header-icon">
+                                    <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m450.201 407.453c-1.505-.977-12.832-8.912-24.174-32.917-20.829-44.082-25.201-106.18-25.201-150.511 0-.193-.004-.384-.011-.576-.227-58.589-35.31-109.095-85.514-131.756v-34.657c0-31.45-25.544-57.036-56.942-57.036h-4.719c-31.398 0-56.942 25.586-56.942 57.036v34.655c-50.372 22.734-85.525 73.498-85.525 132.334 0 44.331-4.372 106.428-25.201 150.511-11.341 24.004-22.668 31.939-24.174 32.917-6.342 2.935-9.469 9.715-8.01 16.586 1.473 6.939 7.959 11.723 15.042 11.723h109.947c.614 42.141 35.008 76.238 77.223 76.238s76.609-34.097 77.223-76.238h109.947c7.082 0 13.569-4.784 15.042-11.723 1.457-6.871-1.669-13.652-8.011-16.586zm-223.502-350.417c0-14.881 12.086-26.987 26.942-26.987h4.719c14.856 0 26.942 12.106 26.942 26.987v24.917c-9.468-1.957-19.269-2.987-29.306-2.987-10.034 0-19.832 1.029-29.296 2.984v-24.914zm29.301 424.915c-25.673 0-46.614-20.617-47.223-46.188h94.445c-.608 25.57-21.549 46.188-47.222 46.188zm60.4-76.239c-.003 0-213.385 0-213.385 0 2.595-4.044 5.236-8.623 7.861-13.798 20.104-39.643 30.298-96.129 30.298-167.889 0-63.417 51.509-115.01 114.821-115.01s114.821 51.593 114.821 115.06c0 .185.003.369.01.553.057 71.472 10.25 127.755 30.298 167.286 2.625 5.176 5.267 9.754 7.861 13.798z" /></svg>
+                                </span>
+                                <span class="count-notification"></span>
+                            </a>
+                            <div class="recent-notification">
+                                <div class="drop-down-header">
+                                    <h4>New Orders</h4>
+                                    <p>You have 6 new orders</p>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h5><i class="fas fa-exclamation-circle mr-2"></i>Ali Arshad</h5>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h5><i class="far fa-envelope mr-2"></i>Kamran Khan</h5>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="drop-down-footer">
+                                    <a href='@Url.Action("Index","Order")' class="btn sm-btn">
+                                        View All
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-info-wrapper header-links">
+                            <a href="javascript:void(0);" class="user-info">
+                                <img src="assets/images/user.jpg" alt="" class="user-img">
+                                <div class="blink-animation">
+                                    <span class="blink-circle"></span>
+                                    <span class="main-circle"></span>
+                                </div>
+                            </a>
+                            <div class="user-info-box">
+                                <div class="drop-down-header">
+                                    <h4>Indigo Admin</h4>
+                                    <p>Administrator</p>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-edit"></i> Edit Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-cog"></i> Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-sign-out-alt"></i> logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Sidebar Start -->
+        <aside class="sidebar-wrapper">
+            <div class="logo-wrapper">
+                <a href='@Url.Action("Index","Home")' class="admin-logo">
+                    <img src="assets/images/logo.png" alt="" class="sp_logo">
+                    <img src="assets/images/mini_logo.png" alt="" class="sp_mini_logo">
+                </a>
+            </div>
+            <div class="side-menu-wrap">
+                <ul class="main-menu">
+                    <li>
+                        <a href='@Url.Action("Index","Home")' class="active">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </span>
+                            <span class="menu-text">
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href='@Url.Action("Index","Product")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            </span>
+                            <span class="menu-text">
+                                Products
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Order")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </span>
+                            <span class="menu-text">
+                                Orders
+                            </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href='@Url.Action("Index","UserAccount")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                            <span class="menu-text">
+                                Customers
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","OrderTaker")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                            <span class="menu-text">
+                                Order Takers
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Supplier")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                            <span class="menu-text">
+                                vendors
+                            </span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href='@Url.Action("Index","DeliveryBoy")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </span>
+                            <span class="menu-text">
+                                Delivery Boy
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Inventory")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                            </span>
+                            <span class="menu-text">
+                                Purchases
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Brand")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid nav-icon"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            </span>
+                            <span class="menu-text">
+                                Brands
+                            </span>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href='@Url.Action("Index","Category")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid nav-icon"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            </span>
+                            <span class="menu-text">
+                                Categories
+                            </span>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="javascript:void(0);">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-wind"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                            </span>
+                            <span class="menu-text">
+                                General Expense
+                            </span>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="javascript:void(0);">
+                            <span class="icon-menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" enable-background="new 0 0 100 100" viewBox="0 0 100 100" fill="#fff"><path d="M79.465 34.479c.681 0 1.358-.276 1.852-.819l.034-.037c.928-1.022.835-2.585-.188-3.513-1.022-.929-2.62-.833-3.548.188-.929 1.022-.852 2.604.17 3.531C78.264 34.265 78.865 34.479 79.465 34.479zM72.627 35.785c-.93 1.021-.855 2.602.166 3.531.479.437 1.082.651 1.682.651.68 0 1.356-.275 1.85-.817l.047-.052c.93-1.021.832-2.576-.188-3.506C75.161 34.664 73.557 34.764 72.627 35.785zM21.351 30.261c-.929-1.021-2.492-1.079-3.515-.151s-1.082 2.527-.154 3.55c.494.543 1.172.819 1.853.819.6 0 1.2-.214 1.68-.649 1.022-.928 1.099-2.509.171-3.531L21.351 30.261zM24.523 39.968c.602 0 1.203-.215 1.683-.651 1.021-.93 1.095-2.511.166-3.531l-.048-.052c-.929-1.021-2.486-1.067-3.508-.141-1.021.93-1.071 2.537-.142 3.558C23.168 39.692 23.845 39.968 24.523 39.968zM45.332 87.628c-11.871-2.054-20.215-12.096-20.399-23.736l4.949.855-6.598-12.229-10.321 9.303 4.979.861C17.533 78.204 28.433 91.809 44.14 94.527c12.95 2.238 25.693-3.598 32.466-14.866l-5.999-3.606C65.334 84.828 55.412 89.371 45.332 87.628zM54.904 32.254c-12.763-2.204-25.814 3.779-32.48 14.887l6.002 3.603c5.189-8.648 15.352-13.306 25.285-11.591 11.875 2.055 20.215 12.096 20.4 23.736l-4.951-.855 6.6 12.229 10.321-9.304-4.979-.86C81.509 48.575 70.616 34.973 54.904 32.254z" /><circle cx="80" cy="11.5" r="6.5" /><path d="M92.5,23c0-2.749-4.541-5-10.092-5H80h-2.408C72.041,18,67.5,20.251,67.5,23v0.001l0,0V28h25V23L92.5,23L92.5,23z" /><circle cx="50" cy="11.5" r="6.5" /><path d="M62.5,28v-4.999l0,0V23c0-2.749-4.541-5-10.092-5H50h-2.408C42.041,18,37.5,20.251,37.5,23v0.001l0,0V28H62.5z" /><circle cx="20" cy="11.5" r="6.5" /><path d="M32.5 28v-4.999l0 0V23c0-2.749-4.541-5-10.092-5H20h-2.408C12.041 18 7.5 20.251 7.5 23v.001l0 0V28H32.5zM32.526 68.262H32.5v7.68h13.125l2.674-6.294-3.6-4.706h9.6l-3.6 4.706 2.676 6.294H66.5v-7.68h-.027c-.281-3.542-6.327-6.4-13.695-6.4H50.64c4.432-.562 7.86-4.338 7.86-8.92 0-4.972-4.029-9-9-9s-9 4.028-9 9c0 4.582 3.429 8.358 7.859 8.92h-2.135C38.854 61.861 32.809 64.72 32.526 68.262z" /></svg>
+                            </span>
+                            <span class="menu-text">
+                                Supplier
+                            </span>
+                        </a>
+                    </li>
+                    <li class="hide">
+                        <a href="javascript:void(0);">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                            </span>
+                            <span class="menu-text">
+                                Transactions
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index","Reports")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                            </span>
+                            <span class="menu-text">
+                                Reports
+                            </span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href='@Url.Action("Index","Areas")'>
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                            </span>
+                            <span class="menu-text">
+                                Areas
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Container Start -->
+        <div class="page-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="slide-setting-box">
+        <div class="slide-setting-holder">
+            <div class="setting-box-head">
+                <h4>Dashboard Demo</h4>
+                <a href="javascript:void(0);" class="close-btn">Close</a>
+            </div>
+            <div class="setting-box-body">
+                <div class="sd-light-vs">
+                    <a href="https://kamleshyadav.com/html/splashdash/splashdash-admin-template/index.html">
+                        Light Version
+                        <img src="assets/images/light.png" alt="" />
+                    </a>
+                </div>
+                <div class="sd-light-vs">
+                    <a href="https://kamleshyadav.com/html/splashdash/splashdash-admin-template-dark/">
+                        dark Version
+                        <img src="assets/images/dark.png" alt="" />
+                    </a>
+                </div>
+            </div>
+            <div class="sd-color-op">
+                <h5>color option</h5>
+                <div id="style-switcher">
+                    <div>
+                        <ul class="colors">
+                            <li>
+                                <p class='colorchange' id='color'>
+                                </p>
+                            </li>
+                            <li>
+                                <p class='colorchange' id='color2'>
+                                </p>
+                            </li>
+                            <li>
+                                <p class='colorchange' id='color3'>
+                                </p>
+                            </li>
+                            <li>
+                                <p class='colorchange' id='color4'>
+                                </p>
+                            </li>
+                            <li>
+                                <p class='colorchange' id='color5'>
+                                </p>
+                            </li>
+                            <li>
+                                <p class='colorchange' id='style'>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("AppModals", required: false)
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="~/Assets/js/popper.min.js"></script>
+    <script src="~/Assets/js/datatables.min.js"></script>
+    @*<script src="~/Assets/js/dataTables.responsive.min.js"></script>*@
+    <script src="~/Assets/js/moment.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="~/Assets/js/custom.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

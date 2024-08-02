@@ -1,0 +1,290 @@
+﻿ 
+ 
+	@{
+    ViewData["Title"] = "Brands";
+}
+ <div class="main-content">
+    <!-- Page Title Start -->
+    <div class="row">
+        <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-title-wrapper">
+                <div class="page-title-box ad-title-box-use">
+                    <h4 class="page-title">Brands</h4>
+                </div>
+                <div class="ad-breadcrumb">
+                    <ul>
+                        <li>
+                            <div class="ad-user-btn">
+                                <input class="form-control" type="text" placeholder="Search Here..." id="text-input">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+												s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+												c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+												s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                                </svg>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="add-group">
+                                <a class="ad-btn" onclick="OpenNewModel()">New Brand</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table Start -->
+    <div class="row">
+        <!-- Styled Table Card-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card table-card">
+                <div class="card-header pb-0">
+                    <h4>Brands</h4>
+                </div>
+                <div class="card-body">
+                    <table id="dtBrands" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                
+                                <th>Title</th>
+                                <th>Summary</th>
+                                <th>CreatedAt</th>
+                                
+                                @*<th>Logo</th>*@
+                                <th>Action</th>
+                                 
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section AppModals{
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">New Brand</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="brandForm">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Name</label>
+                                    <input required="required" id="Title" class="form-control required" type="text" placeholder="Name">
+                                </div>
+                            
+                              
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                
+                               
+                               
+                                <div class="form-group">
+                                    <label class="col-form-label">Image</label>
+                                    <input id="Image" class="form-control" accept="image/png, image/gif, image/jpeg, image/webp" type="file" placeholder="Price">
+                                </div>
+                            </div>
+                            <input type="hidden" id="BrandId" />
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label for="additional-msg" class="col-form-label">Summary</label>
+                                    <textarea id="Summary" class="form-control" placeholder="Brand Summary"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveItem()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script>
+        var dtBrands = null;
+        var EditObject = null;
+
+        $(document).ready(function () {
+            LoadAll();
+        });
+
+        function LoadAll() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Brand/GetAllBrands',
+                success: function (data) {
+                    console.log(data);
+                    BindDataTable(data);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function BindDataTable(data) {
+            if (dtBrands != null)
+                dtBrands.destroy();
+            dtBrands = $('#dtBrands').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "BrandId",
+                columns: [
+                     {
+                        "searchable": false,
+                        data: "BrandId",
+                        class: "no-sort",
+                        "orderable": false
+                    },
+                    {
+                        data: "Title",
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false
+                    },
+                   
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            if (row.CreatedAt != null) {
+                                var dateOriginal = new Date(row.CreatedAt);
+                                var formattedDate = moment(dateOriginal).format('dddd, DD MMM YYYY');
+                                return formattedDate;
+                            }
+                        }
+                    },
+                    // {
+                    //    "searchable": false,
+                    //    data: null,
+                    //    class: "no-sort",
+                    //    "orderable": false,
+                    //    render: function (data, type, row, meta) {
+                    //        if (row.Image!= null) {
+                                 
+                    //            var ImageUrl = row.Image ;
+                    //            return ImageUrl;
+                    //        }
+                    //        return "";
+                    //    }
+                    //},
+                   
+                    {
+                        data: null,
+                        "searchable": false,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var html = '<div class="relative"><a class="action-btn" href="javascript:void(0);"> <svg class="default-size " viewBox="0 0 341.333 341.333 "> <g> <g> <g> <path d="M170.667,85.333c23.573,0,42.667-19.093,42.667-42.667C213.333,19.093,194.24,0,170.667,0S128,19.093,128,42.667 C128,66.24,147.093,85.333,170.667,85.333z "></path> <path d="M170.667,128C147.093,128,128,147.093,128,170.667s19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 S194.24,128,170.667,128z "></path> <path d="M170.667,256C147.093,256,128,275.093,128,298.667c0,23.573,19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 C213.333,275.093,194.24,256,170.667,256z "></path> </g> </g> </g> </svg> </a> <div class="action-option"> <ul> <li> <a onclick="EditItem(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Edit</a> </li> <li> <a href="javascript:void(0);" onclick="DeleteItem(' + row.BrandId + ')"><i class="far fa-trash-alt mr-2"></i>Delete</a> </li> </ul> </div></div>';
+                            return html;
+                        }
+                    }
+                ]
+            });
+        }
+
+        function OpenNewModel() {
+            $('#BrandId').val('');
+            $('#Title').val('');
+            
+            $('#Summary').val('');
+           
+          
+          
+          
+            $("#exampleModalLong").modal("show");
+        }
+
+        function EditItem(element) {
+            var data = dtBrands.row($(element).parents('tr')).data();
+            $('#BrandId').val(data.BrandId);
+            $('#Title').val(data.Title);
+          
+            $('#Summary').val(data.Summary);
+            
+            
+           
+            $("#exampleModalLong").modal("show");
+        }
+
+        function DeleteItem(id) {
+            var host = window.location;
+            $.ajax({
+                url: host.protocol + "//" + host.host + '/Brand/Delete?id=' + id,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                success: function (json) {
+                    LoadAll();
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function SaveItem() {
+            if (CheckRequired($('#brandForm'))) {
+                var BrandInfo = {
+                    BrandId: $('#BrandId').val(),
+                    Title: $('#Title').val(),
+                
+                    Summary: $('#Summary').val(),
+                   
+                    Discount: $('#Discount').val()
+                };
+                var file = document.getElementById("Image").files[0];
+                var formData = new FormData();
+                formData.append('BrandId', BrandInfo.BrandId);
+                formData.append('Title', BrandInfo.Title);
+                formData.append('BrandLogo', file);
+             
+                formData.append('Summary', BrandInfo.Summary);
+               
+               
+                $.ajax({
+                    url: '/Brand/Save',
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (result) {
+                        $("#exampleModalLong").modal("hide");
+                        LoadAll();
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+            } else {
+                alert('Please fill all required fields!');
+            }
+        }
+
+        function CheckRequired($element) {
+            var $form = $element;
+
+            if ($form.find('.required').filter(function () { return this.value === '' }).length > 0) {
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+}

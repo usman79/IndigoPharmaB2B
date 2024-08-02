@@ -1,0 +1,627 @@
+﻿
+
+@{
+    ViewData["Title"] = "Purchase";
+}
+<div class="main-content">
+    <!-- Page Title Start -->
+    <div class="row">
+        <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-title-wrapper">
+                <div class="page-title-box ad-title-box-use">
+                    <h4 class="page-title">Purchases</h4>
+                </div>
+                <div class="ad-breadcrumb">
+                    <ul>
+                        <li>
+                            <div class="ad-user-btn">
+                                <input class="form-control" type="text" placeholder="Search Here..." id="text-input">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+												s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+												c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+												s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                                </svg>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="add-group">
+                                <a class="ad-btn" onclick="OpenNewModel()">New Purchase</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table Start -->
+    <div class="row">
+        <!-- Styled Table Card-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card table-card">
+                <div class="card-header pb-0">
+                    <h4>Purchases</h4>
+                </div>
+                <div class="card-body">
+                    <table id="dtBrands" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                        <thead>
+                            <tr>
+                                <th style="width:30%">Product</th>
+                                <th style="width:20%">Supplier</th>
+                                <th style="width:10%">Quantity</th>
+                                <th style="width:10%">Price</th>
+                                <th style="width:15%">Batch</th>
+                                <th style="width:15%">Date</th>
+                                <th style="width:10%">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section AppModals{
+    <div class="modal fade" id="addInventoryModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addInventoryModelTitle">Add Purchase</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="InventoryForm">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+                                <label for="SupplierId" class="col-form-label">Supplier</label>
+                                <select required="required" id="SupplierId" class="form-control required select-opt">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row row-inventory-info">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <label for="InventoryProductId" class="col-form-label">Product</label>
+                                <select required="required" id="InventoryProductId" class="form-control required select-opt">
+                                </select>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Quantity</label>
+                                    <input id="InventoryQuantity" class="form-control required" type="number" placeholder="Quantity">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Batch Number</label>
+                                    <input required="required" id="BatchNumber" class="form-control required" type="text" placeholder="Batch Number">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Additional Discount</label>
+                                    <input id="Discount" onchange="DiscountChange()" class="form-control required" type="number" value="0" placeholder="Additional Discount">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">MRP</label>
+                                    <input disabled="disabled" required="required" id="MRP" class="form-control required" type="number" placeholder="MR Price">
+                                  
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">TP</label>
+                                    <input disabled="disabled" required="required" id="TP" class="form-control required" type="number" placeholder="Price">
+                                    <input disabled="disabled" required="required" id="InventoryPrice" class="form-control required" type="hidden" placeholder="Price">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Purchase Price</label>
+                                    <input disabled="disabled" required="required" id="PurchasePrice" class="form-control required" type="text" placeholder="Purchase Price">
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button id="btnAddToGrid" type="button" class="btn btn-sm btn-primary" onclick="AddItemToGrid()">Add Item</button>
+                            </div>
+                            <input type="hidden" id="InventoryId" />
+                            <input type="hidden" id="ItemId" />
+                        </div>
+                    </form>
+                    <table id="batchTable" class="dataTable">
+                        <thead>
+                            <tr>
+                                <th width="35%">Product</th>
+                                <th width="25%">Batch Number</th>
+                                <th width="10%">Quantity</th>
+                                <th width="10%">Sell Price</th>
+                                <th width="10%">Purchase Price</th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="GridNewPurchase">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><button onclick="OpenInventoryModal(this)" type="button" class="btn btn-info btn-add"><i class="fas fa-pencil-alt"></i></button><button onclick="OpenInventoryModal(this)" type="button" class="btn btn-danger btn-add"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveItem()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editInventoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Inventory</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveItem()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script>
+        var dtBrands = null;
+        var EditObject = null;
+        var UserId = @Html.Raw(@ViewBag.UserId);
+        var GridItemIndex = 0;
+        var NewItemList = [];
+        var ProductList = [];
+
+        $(document).ready(function () {
+            LoadAll();
+            LoadAllSupplier();
+            LoadProduct();
+
+            $('#addInventoryModel').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        });
+
+        function LoadAll() {
+            if (UserId != "" && UserId != "0") {
+                LoadAllByUser(UserId);
+            }
+            else {
+                LoadAllData();
+            }
+        }
+
+        function LoadAllData() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Inventory/GetAllInventory',
+                success: function (data) {
+                    console.log(data);
+                    BindDataTable(data);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function LoadAllByUser(Id) {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Inventory/GetAllInventoryByUser?Id=' + Id,
+                success: function (data) {
+                    console.log(data);
+                    BindDataTable(data);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function LoadProduct() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Product/GetAllPrdocuts',
+                success: function (data) {
+                    ProductList = data;
+                    console.log(data);
+                    data.forEach(function (entry) {
+                        $('#InventoryProductId').append('<option value="' + entry.ProductId + '">' + entry.Title + '</option>')
+                    });
+                    $('#InventoryProductId').select2({
+                        placeholder: "Select a Product",
+                        dropdownParent: $("#addInventoryModel")
+                    });
+                    $('#InventoryProductId').on('select2:selecting', function (e) {
+                        var id = e.params.args.data.id;
+                        if (id != "") {
+                            var selectedProduct=ProductList.filter(function(item) {
+                                return item.ProductId == id;
+                            });
+                            CalculateSetTp(selectedProduct[0]);
+                        }
+                    });
+                    $("#InventoryProductId").val('').trigger('change');
+                },
+                error: function (result) {
+                    $('#InventoryProductId').select2({
+                        dropdownParent: $("#addInventoryModel")
+                    });
+                }
+            });
+        }
+
+        function CalculateSetTp(selectedProduct) {
+            var Discount = $('#Discount').val();
+            var price = selectedProduct.Price;
+            var tp = price - (price * 0.15);
+            $('#TP').val(tp);
+            if (Discount != '') {
+                Discount = parseFloat(Discount);
+                var ad = tp - (tp * (Discount / 100));
+                $('#PurchasePrice').val(ad.toFixed(2));
+                $('#MRP').val(price);
+            }
+            else {
+                $('#PurchasePrice').val(tp);
+            }
+            $('#InventoryPrice').val(selectedProduct.Price);
+        }
+
+        function DiscountChange() {
+            var Discount = $('#Discount').val();
+            
+            if (Discount != "") {
+                if (parseFloat(Discount) > 10 || parseFloat(Discount) < 0) {
+                    alert("Discount Value out of Limit !");
+                    return;
+                }
+                var price = $('#InventoryPrice').val();
+                var tp = $('#TP').val();
+                Discount = parseFloat(Discount);
+                var ad = tp - (tp * (Discount / 100));
+                $('#PurchasePrice').val(ad.toFixed(2));
+            }
+            else {
+                $('#PurchasePrice').val($('#TP').val());
+            }
+        }
+
+        function LoadAllSupplier() {
+            var host = window.location;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Supplier/GetAll',
+                success: function (data) {
+                    data.forEach(function (entry) {
+                        $('#SupplierId').append('<option value="' + entry.UserId + '">' + entry.UserFirstName + " " + entry.UserLastName + '</option>')
+                    });
+                    $('#SupplierId').select2({
+                        placeholder: "Select a Supplier",
+                        dropdownParent: $("#addInventoryModel")
+                    }).on("change", function (e) {
+                        var selectedSupplier = $('#SupplierId').val();
+                        if (selectedSupplier != null && $('#SupplierId').val() != '') {
+                            $('.row-inventory-info').removeClass('hide');
+                            $("#InventoryProductId").val('').trigger('change');
+                            $('#InventoryId').val('');
+                            $('#ItemId').val('');
+                            $('#InventoryQuantity').val('');
+                            $('#InventoryPrice').val('');
+                            $('#BatchNumber').val('');
+                        }
+                        else {
+                            $('.row-inventory-info').addClass('hide');
+                        }
+                    });
+                    $("#SupplierId").val('').trigger('change');
+                },
+                error: function (result) {
+                    $('#SupplierId').select2({
+                        placeholder: "Select a Supplier",
+                        dropdownParent: $("#addInventoryModel")
+                    });
+                }
+            });
+        }
+
+        $("#SupplierId").on("select2-selecting", function (e) {
+            console.log(e.choice);
+        });
+
+        function BindDataTable(data) {
+            if (dtBrands != null)
+                dtBrands.destroy();
+            dtBrands = $('#dtBrands').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "InventoryId",
+                columns: [
+                     {
+                        "searchable": false,
+                        data: "ProductTitle",
+                        class: "no-sort text-truncate",
+                        "orderable": false
+                    },
+                    {
+                        data: "SupplierName",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": false
+                    },
+                    {
+                        data: "Quantity",
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false
+                    },
+                    {
+                        data: "Price",
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false
+                    },
+                    {
+                        data: "BatchNumber",
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false
+                    },
+
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            if (row.CreatedAt != null) {
+                                var dateOriginal = new Date(row.CreatedAt);
+                                var formattedDate = moment(dateOriginal).format('DD MMM YYYY');
+                                return formattedDate;
+                            }
+                        }
+                    },
+                    {
+                        data: null,
+                        "searchable": false,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var html = '<div class="relative"><a class="action-btn" href="javascript:void(0);"> <svg class="default-size " viewBox="0 0 341.333 341.333 "> <g> <g> <g> <path d="M170.667,85.333c23.573,0,42.667-19.093,42.667-42.667C213.333,19.093,194.24,0,170.667,0S128,19.093,128,42.667 C128,66.24,147.093,85.333,170.667,85.333z "></path> <path d="M170.667,128C147.093,128,128,147.093,128,170.667s19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 S194.24,128,170.667,128z "></path> <path d="M170.667,256C147.093,256,128,275.093,128,298.667c0,23.573,19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 C213.333,275.093,194.24,256,170.667,256z "></path> </g> </g> </g> </svg> </a> <div class="action-option"> <ul> <li> <a onclick="EditItem(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Edit</a> </li> <li> <a href="javascript:void(0);" onclick="DeleteItem(' + row.BrandId + ')"><i class="far fa-trash-alt mr-2"></i>Delete</a> </li> </ul> </div></div>';
+                            return html;
+                        }
+                    }
+                ]
+            });
+        }
+
+        function OpenNewModel() {
+            $('#InventoryId').val('');
+            $('#InventoryProductId').val('');
+            $('#InventoryQuantity').val('');
+            $('#SupplierId').val('');
+            $('#InventoryPrice').val('');
+            $('#BatchNumber').val('');
+            GridItemIndex = 0;
+            $('#GridNewPurchase').empty();
+            NewItemList = [];
+            $('#batchTable').removeClass('hide');
+            $('#btnAddToGrid').removeClass('hide');
+            $('#InventoryProductId').prop('disabled', false);
+            $('#SupplierId').prop('disabled', false);
+            $("#addInventoryModel").modal("show");
+        }
+
+        function EditItem(element) {
+            var data = dtBrands.row($(element).parents('tr')).data();
+            $('#SupplierId').val(data.SupplierId).trigger("change");
+            $('#InventoryId').val(data.InventoryId);
+            $('#InventoryProductId').val(data.ProductId).trigger("change");
+            $('#InventoryQuantity').val(data.Quantity);
+            $('#InventoryPrice').val(data.Price);
+            $('#MRP').val(data.Price);
+            $('#Discount').val(data.Discount);
+            $('#BatchNumber').val(data.BatchNumber);
+            $('#batchTable').addClass('hide');
+            $('#btnAddToGrid').addClass('hide');
+            $('.row-inventory-info').removeClass('hide');
+            CalculateSetTp(data);
+            DiscountChange();
+
+            $('#InventoryProductId').prop('disabled', true);
+            $('#SupplierId').prop('disabled', true);
+            NewItemList = [];
+            $("#addInventoryModel").modal("show");
+        }
+
+        function DeleteItem(id) {
+            var host = window.location;
+            $.ajax({
+                url: host.protocol + "//" + host.host + '/Brand/Delete?id=' + id,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                success: function (json) {
+                    LoadAll();
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function SaveItem() {
+            var InventoryId = $('#InventoryId').val();
+            if (InventoryId == '' || InventoryId == null) {
+
+                if (NewItemList.length > 0) {
+                    dataObj = JSON.stringify(NewItemList);
+                    $.ajax({
+                        url: '/Inventory/Save',
+                        type: "POST",
+                        contentType: 'application/json',
+                        data: dataObj,
+                        success: function (result) {
+                            LoadAll();
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+                } else {
+                    alert('Please add some record to grid first!');
+                }
+            }
+            else {
+
+                    var InventoryInfo = {
+                        InventoryId: $('#InventoryId').val(),
+                        Quantity : $('#InventoryQuantity').val(),
+                        ProductId : $('#InventoryProductId').val(),
+                        BatchNumber : $('#BatchNumber').val(),
+                        Price : $('#InventoryPrice').val(),
+                        Discount : $('#Discount').val(),
+                        PurchasePrice : $('#PurchasePrice').val()
+                    };
+                    var formData = new FormData();
+                    formData.append('InventoryId', InventoryInfo.InventoryId);
+                    formData.append('Quantity', InventoryInfo.Quantity);
+                    formData.append('ProductId', InventoryInfo.ProductId);
+                    formData.append('BatchNumber', InventoryInfo.BatchNumber);
+                    formData.append('Price', InventoryInfo.Price);
+                    formData.append('Discount', InventoryInfo.Discount);
+                    formData.append('PurchasePrice', InventoryInfo.PurchasePrice);
+
+
+                    $.ajax({
+                        url: '/Inventory/Update',
+                        type: "POST",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (result) {
+                            $("#addInventoryModel").modal("hide");
+                            LoadAll();
+                        },
+                        error: function (err) {
+                            alert(err.statusText);
+                        }
+                    });
+            }
+        }
+
+        function CheckRequired($element) {
+            var $form = $element;
+            
+            if ($form.find('.required').filter(function () { return this.value === '' }).length > 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function AddItemToGrid() {
+            if (CheckRequired($('#InventoryForm'))) {
+                var itemId = $('#ItemId').val();
+                if (itemId != '') {
+                    var dataTemp = NewItemList.filter(function (x) {
+                        return x.ItemId == itemId;
+                    })[0];
+                    dataTemp.Quantity = $('#InventoryQuantity').val();
+                    dataTemp.ProductId = $('#InventoryProductId').val();
+                    dataTemp.BatchNumber = $('#BatchNumber').val();
+                    dataTemp.Price = $('#InventoryPrice').val();
+                    dataTemp.Discount = $('#Discount').val();
+                    dataTemp.PurchasePrice = $('#PurchasePrice').val();
+                    $('#GridNewPurchase').empty();
+                    for (var i = 0; i < NewItemList.length; i++) {
+                        var InventoryInfo = NewItemList[i];
+                        InventoryInfo.ItemId = i;
+                        $('#GridNewPurchase').append('<tr id="row_' + i + '"> <td>' + InventoryInfo._prodName + '</td> <td>' + InventoryInfo.BatchNumber + '</td> <td>' + InventoryInfo.Quantity + '</td> <td>' + InventoryInfo.Price + '</td><td>' + InventoryInfo.PurchasePrice + '</td> <td><button onclick="DeleteGridItem(this)" type="button" class="btn btn-danger btn-add"><i class="fas fa-trash"></i></button></td> </tr>');//<button onclick="EditGridItem(this)" type="button" class="btn btn-info btn-add"><i class="fas fa-pencil-alt"></i></button>
+                    }
+                } else {
+                    GridItemIndex++;
+                    var InventoryInfo = {
+                        ItemId: GridItemIndex,
+                        ProductId: $('#InventoryProductId').val(),
+                        Quantity: $('#InventoryQuantity').val(),
+                        SupplierId: $('#SupplierId').val(),
+                        BatchNumber: $('#BatchNumber').val(),
+                        Price: $('#InventoryPrice').val(),
+                        Discount: $('#Discount').val(),
+                        PurchasePrice: $('#PurchasePrice').val(),
+                        _prodName: $('#InventoryProductId option:selected').text()
+                    };
+                    NewItemList.push(InventoryInfo);
+                    $('#GridNewPurchase').append('<tr id="row_' + GridItemIndex + '"> <td>' + InventoryInfo._prodName + '</td> <td>' + InventoryInfo.BatchNumber + '</td> <td>' + InventoryInfo.Quantity + '</td> <td>' + InventoryInfo.Price + '</td><td>' + InventoryInfo.PurchasePrice + '</td> <td> <button onclick="DeleteGridItem(this)" type="button" class="btn btn-danger btn-add"><i class="fas fa-trash"></i></button></td> </tr>');
+                }
+                $('#InventoryId').val('');
+                $('#ItemId').val('');
+                $('#InventoryQuantity').val('');
+                $('#InventoryPrice').val('');
+                $('#BatchNumber').val('');
+                $('#Discount').val('');
+                $('#PurchasePrice').val('');
+            }
+            else {
+                alert('Please fill all required fields!');
+            }
+        }
+
+        function EditGridItem(element) {
+            var index = $(element).closest('tr').attr('id').replace('row_', '');
+            var dataTemp = NewItemList.filter(function (x) {
+                return x.ItemId == index;
+            })[0];
+            $('#InventoryId').val(dataTemp.InventoryId);
+            $('#ItemId').val(dataTemp.ItemId);
+            $('#InventoryQuantity').val(dataTemp.Quantity);
+            $('#InventoryProductId').val(dataTemp.ProductId);
+            $('#SupplierId').val(dataTemp.SupplierId);
+            $('#InventoryPrice').val(parseInt(dataTemp.Price));
+            $('#BatchNumber').val(dataTemp.BatchNumber);
+            console.log(dataTemp);
+        }
+
+        function DeleteGridItem(element) {
+            var index = $(element).closest('tr').attr('id').replace('row_', '');
+            NewItemList.splice(index, 1);
+            GridItemIndex--;
+            $('#GridNewPurchase').empty();
+            for (var i = 0; i < NewItemList.length; i++) {
+                var InventoryInfo = NewItemList[i];
+                InventoryInfo.ItemId = i;
+                $('#GridNewPurchase').append('<tr id="row_' + i + '"> <td>' + InventoryInfo._prodName + '</td> <td>' + InventoryInfo.BatchNumber + '</td> <td>' + InventoryInfo.Quantity + '</td> <td>' + InventoryInfo.Price + '</td><td>' + InventoryInfo.PurchasePrice + '</td> <td> <button onclick="DeleteGridItem(this)" type="button" class="btn btn-danger btn-add"><i class="fas fa-trash"></i></button></td> </tr>');
+            }
+        }
+    </script>
+}

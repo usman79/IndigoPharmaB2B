@@ -1,0 +1,975 @@
+﻿@{
+    ViewData["Title"] = "Orders";
+}
+@section Styles{
+    <style>
+
+        .invoice-POS .text-secondary-d1 {
+            color: #728299 !important;
+        }
+
+        .invoice-POS .page-header {
+            margin: 0 0 1rem;
+            padding-bottom: 1rem;
+            padding-top: .5rem;
+            border-bottom: 1px dotted #e2e2e2;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .invoice-POS .page-title {
+            padding: 0;
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 300;
+        }
+
+        .invoice-POS .brc-default-l1 {
+            border-color: #dce9f0 !important;
+        }
+
+        .invoice-POS .ml-n1, .invoice-POS .mx-n1 {
+            margin-left: -.25rem !important;
+        }
+
+        .invoice-POS .mr-n1, .invoice-POS .mx-n1 {
+            margin-right: -.25rem !important;
+        }
+
+        .invoice-POS .mb-4, .invoice-POS .my-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .invoice-POS hr {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0,0,0,.1);
+        }
+
+        .invoice-POS .text-grey-m2 {
+            color: #888a8d !important;
+        }
+
+        .invoice-POS .text-success-m2 {
+            color: #86bd68 !important;
+        }
+
+        .invoice-POS .font-bolder, .text-600 {
+            font-weight: 600 !important;
+        }
+
+        .invoice-POS .text-110 {
+            font-size: 110% !important;
+        }
+
+        .invoice-POS .text-blue {
+            color: #478fcc !important;
+        }
+
+        .invoice-POS .pb-25, .invoice-POS .py-25 {
+            padding-bottom: .75rem !important;
+        }
+
+        .invoice-POS .pt-25, .invoice-POS .py-25 {
+            padding-top: .75rem !important;
+        }
+
+        .invoice-POS .bgc-default-tp1 {
+            background-color: rgba(121,169,197,.92) !important;
+        }
+
+        .invoice-POS .bgc-default-l4, .invoice-POS .bgc-h-default-l4:hover {
+            background-color: #f3f8fa !important;
+        }
+
+        .invoice-POS .page-header .page-tools {
+            -ms-flex-item-align: end;
+            align-self: flex-end;
+        }
+
+        .invoice-POS .btn-light {
+            color: #757984;
+            background-color: #f5f6f9;
+            border-color: #dddfe4;
+        }
+
+        .invoice-POS .w-2 {
+            width: 1rem;
+        }
+
+        .invoice-POS .text-120 {
+            font-size: 120% !important;
+        }
+
+        .invoice-POS .text-primary-m1 {
+            color: #4087d4 !important;
+        }
+
+        .invoice-POS .text-danger-m1 {
+            color: #dd4949 !important;
+        }
+
+        .invoice-POS .text-blue-m2 {
+            color: #68a3d5 !important;
+        }
+
+        .invoice-POS .text-150 {
+            font-size: 150% !important;
+        }
+
+        .invoice-POS .text-60 {
+            font-size: 60% !important;
+        }
+
+        .invoice-POS .text-grey-m1 {
+            color: #7b7d81 !important;
+        }
+
+        .invoice-POS .align-bottom {
+            vertical-align: bottom !important;
+        }
+    </style>
+}
+<div class="main-content">
+    <!-- Page Title Start -->
+    <div class="row">
+        <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-title-wrapper">
+                <div class="page-title-box ad-title-box-use">
+                    <h4 class="page-title">Orders</h4>
+                </div>
+                <div class="ad-breadcrumb">
+                    <ul>
+                        <li>
+                            <div class="ad-user-btn">
+                                <input class="form-control" type="text" placeholder="Search Here..." id="text-input">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966">
+                                    <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+												s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+												c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+												s-17-7.626-17-17S14.61,6,23.984,6z"></path>
+                                </svg>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="add-group">
+                                <a class="ad-btn hide" id="btnBulkPrint" onclick="BulkPrintClick()">Bulk Print</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table Start -->
+    <div class="row">
+        <!-- Styled Table Card-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card table-card">
+                <div class="card-header pb-0">
+                    <h4>Recent Orders</h4>
+                </div>
+                <div class="card-body">
+                    <table id="dtOrders" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                        <thead>
+                            <tr>
+                                <th style="width:5%"><div class="form-check"> <input name="select_all" class="form-check-input" type="checkbox" value="" id="example-select-all"></div></th>
+                                <th style="width:20%">User</th>
+                                <th style="width:10%">Status</th>
+                                <th style="width:10%">Date</th>
+                                <th style="width:15%">Address</th>
+                                <th style="width:10%">Balance</th>
+                                <th style="width:10%"></th>
+                                <th style="width:10%">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section AppModals{
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id="dtOrderDetails" class="table table-striped table-bordered dt-responsive nowrap" style=" width: 100%;table-layout: fixed !important;word-wrap: break-word;">
+                        <thead>
+                            <tr>
+                                <th style="width:30%">Product</th>
+                                <th style="width:15%">Quantity</th>
+                                <th style="width:10%">Unit Price</th>
+                                <th style="width:10%">Sale Discount</th>
+                                <th style="width:15%">Product Discount</th>
+                                <th style="width:10%">Sub Total</th>
+                                <th style="width:10%">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 text-right">
+                            <h4 class="mt-2">Total: Rs. <span id="totalAmount"></span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="updateDetailBtn" onclick="UpdateOrderDetails()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPaymentTitle">Payment</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="PaymentType" type="hidden" />
+                    <input id="PaymentOrderId" type="hidden" />
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                        <div class="form-group">
+                            <label class="col-form-label">Amount</label>
+                            <input required="required" id="PaymentAmount" class="form-control required" type="text" placeholder="Amount">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="updateDetailBtn" onclick="AddPayment()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalReceipt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Order Receipt</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="invoice" id="invoice-POS">
+                        <div class="title text-center">
+                            <h1>INDIGO ENTERPRICES</h1>
+                            <p><strong>Arya Nagar, Samanabad Lahore.</strong></p>
+                            <p><strong>Ph#: 0334-9972060</strong></p>
+                        </div>
+                        <div class="border">
+                            <div class="row g-0">
+                                <div class="report-min-height">
+                                    <table width="100">
+                                        <thead>
+                                            <tr>
+                                                <th class="ps-2" width="10%">#</th>
+                                                <th width="80%">Product Name</th>
+                                                <th width="10%">Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="orderProductList">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="invoice" id="invoiceTemplate">
+                        <div class="title text-center">
+                            <h1>INDIGO ENTERPRICES</h1>
+                            <p><strong>Arya Nagar, Samanabad Lahore.</strong></p>
+                            <p><strong>Ph#: 0334-9972060</strong></p>
+                        </div>
+                        <div class="border py-2">
+                            <div class="row g-0">
+                                <div class="col-8">
+                                    <div class="border rounded-5 ms-3 me-1 p-2 h-100">
+                                        <p>1403</p>
+                                        <p><strong><span id="recStore" class="text-uppercase"></span></strong></p>
+                                        <p><span id="recAddress" class="text-uppercase"></span></p>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="border rounded-5 me-3 p-2">
+                                        <h1 class="">Sale Invoice</h1>
+                                        <div class="row g-0">
+                                            <div class="col-6 text-center border border-end-0 border-start-0">
+                                                <p>Invoice #</p>
+                                                <p><span id="recNumber"></span></p>
+                                            </div>
+                                            <div class="col-6 text-center border border-end-0">
+                                                <p>Invoice Date</p>
+                                                <p><span id="recDate"></span></p>
+                                            </div>
+                                        </div>
+                                        <p>Booked by <span id="recTo" class="text-uppercase"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0 mt-2">
+                                <div class="report-min-height">
+                                    <table width="100">
+                                        <thead>
+                                            <tr>
+                                                <th class="ps-2" width="5%">#</th>
+                                                <th width="20%">Product Name</th>
+                                                <th width="10%">Quantity</th>
+                                                <th width="15%">Batch Number</th>
+                                                <th width="10%">Rate</th>
+                                                <th width="10%">Total</th>
+                                                <th width="10%">Sales Disc</th>
+                                                <th width="10%">Product Disc</th>
+                                                <th class="pe-2" width="10%">Net Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="singleOrderDetails">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <table width="100">
+                                    <tbody>
+                                        <tr>
+                                            <th class="ps-2" width="5%"></th>
+                                            <th width="20%"></th>
+                                            <th width="10%"></th>
+                                            <th width="15%"></th>
+                                            <th width="10%"></th>
+                                            <th width="10%"></th>
+                                            <th width="10%"></th>
+                                            <th width="10%"></th>
+                                            <th class="pe-2" width="10%"></th>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td class="border-top border-bottom text-right" colspan="5">Totals:</td>
+                                            <td colspan="2" class="border-top border-bottom totalOriginal"></td>
+                                            <td class="border-top border-bottom" colspan="1"></td>
+                                            <td colspan="1" class="border-top border-bottom total"></td>
+                                        </tr>
+                                        <tr class="net">
+                                            <td></td>
+                                            <td colspan="4" class="priceText"></td>
+                                            <td colspan="3"><h4>Net Payable:</h4></td>
+                                            <td colspan="2"><h4 class="total"></h4></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="downloadPDF()">Print</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <iframe name="printf" style="display:none" height="3508" width="2480" class="iframe-report" type="application/pdf" id="printf" frameborder="0"></iframe>
+
+}
+
+@section Scripts{
+    <script src="~/Assets/js/price-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var dtOrders = null;
+        var dtOrderDetails = null;
+        var EditObject = null;
+        var SelectedOrderId = null;
+
+        $(document).ready(function () {
+            LoadAll();
+        });
+
+        $('#example-select-all').on('click', function () {
+            // Check/uncheck all checkboxes in the table
+            var rows = dtOrders.rows({ 'search': 'applied' }).nodes();
+            $('input[type="checkbox"]', rows).prop('checked', this.checked);
+        });
+
+        $(document).on('change', 'input[type="checkbox"]', function () {
+            $('#btnBulkPrint').addClass('hide');
+            var checkedItems = dtOrders.$('input[type="checkbox"]:checked').length;
+            if (checkedItems > 0) {
+                $('#btnBulkPrint').removeClass('hide');
+            }
+        });
+
+        function LoadAll() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Order/GetAllOrders',
+                success: function (data) {
+                    BindDataTable(data);
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function BindDataTable(data) {
+            if (dtOrders != null)
+                dtOrders.destroy();
+            dtOrders = $('#dtOrders').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'p>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "OrderId",
+                rowCallback: function (row, data) {
+                    if (data.Status == 4) {
+                        $(row).addClass('complete');
+                    }
+                },
+                columns: [
+                    {
+                        data: null,
+                        "orderable": false,
+                        class: "no-sort",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="form-check"> <input class="form-check-input" type="checkbox" name="id[]" value="' + $('<div/>').text(row.OrderId).html() + '"> </div>';
+                        }
+                    },
+                    {
+                        data: "UserName",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="text-primary">' + row.UserName + '</div>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort complete-restriction",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var label = '';
+                            var pendingDisabled = '';
+                            var cancelDisabled = '';
+                            if (row.Status == 1) {
+                                label = '<label class="mb-0 badge badge-dark toltiped" data-bs-toggle="dropdown">Pending</label>';
+                            }
+                            else if (row.Status == 2) {
+                                pendingDisabled = 'disabled';
+                                cancelDisabled = 'disabled';
+                                label = '<label class="mb-0 badge badge-primary toltiped" data-bs-toggle="dropdown">Processing</label>';
+                            }
+                            else if (row.Status == 3) {
+                                label = '<label class="mb-0 badge badge-danger toltiped" data-bs-toggle="dropdown">Canceled</label>';
+                            }
+                            else {
+                                pendingDisabled = 'disabled';
+                                cancelDisabled = 'disabled';
+                                label = '<label class="mb-0 badge badge-success toltiped" data-bs-toggle="dropdown">Complete</label>';
+                            }
+                            return '<div class="dropdown"> ' + label + ' <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> <li><a class="dropdown-item ' + pendingDisabled + '"  href="#" onclick="UpdateOrderStatus(this,1)"><label class="mb-0 badge badge-dark w-100">Pending</label></a></li> <li><a onclick="UpdateOrderStatus(this,2)" class="dropdown-item" href="#"><label class="mb-0 badge badge-primary w-100">Processing</label></a></li> <li><a onclick="UpdateOrderStatus(this,3)" class="dropdown-item ' + cancelDisabled+'" href="#"><label class="mb-0 badge badge-danger w-100">Canceled</label></a></li> <li><a onclick="UpdateOrderStatus(this,4)" class="dropdown-item" href="#"><label class="mb-0 badge badge-success w-100">Complete</label></a></li> </ul> </div>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            if (row.CreatedAt != null) {
+                                var dateOriginal = new Date(row.CreatedAt);
+                                var formattedDate = moment(dateOriginal).format('DD MMM YYYY');
+                                return formattedDate;
+                            }
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: "BillingAddress",
+                        class: "no-sort text-truncate",
+                        "orderable": false
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort text-truncate",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var amount = row.TotalAmount - row.PaidAmount;
+                            return amount;
+                        }
+                    },
+                    {
+                        data: null,
+                        "searchable": false,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var html = '<button onclick="ViewDetails(this)" class="btn btn-primary mt-2 mr-2 icon-sm" title="" data-original-title="Pending"><i class="fas fa-eye"></i></button><button onclick="PrintReciept(this)" class="btn btn-secondary mt-2 mr-2 icon-sm" title="" data-original-title="Pending"><i class="fas fa-print"></i></button>';
+                            return html;
+                        }
+                    },
+                    {
+                        data: null,
+                        "searchable": false,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            var html = '<div class="relative"><a class="action-btn" href="javascript:void(0);"> <svg class="default-size " viewBox="0 0 341.333 341.333 "> <g> <g> <g> <path d="M170.667,85.333c23.573,0,42.667-19.093,42.667-42.667C213.333,19.093,194.24,0,170.667,0S128,19.093,128,42.667 C128,66.24,147.093,85.333,170.667,85.333z "></path> <path d="M170.667,128C147.093,128,128,147.093,128,170.667s19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 S194.24,128,170.667,128z "></path> <path d="M170.667,256C147.093,256,128,275.093,128,298.667c0,23.573,19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 C213.333,275.093,194.24,256,170.667,256z "></path> </g> </g> </g> </svg> </a> <div class="action-option"> <ul> <li> <a onclick="EditItem(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Edit</a> </li><li> <a onclick="AddPaymentMenuClick(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Payment</a> </li><li> <a onclick="AddExpenseMenuClick(this)" href="javascript:void(0);"><i class="far fa-edit mr-2"></i>Debit Expense</a> </li> <li> <a href="javascript:void(0);" onclick="DeleteItem(' + row.OrderId + ')"><i class="far fa-trash-alt mr-2"></i>Delete</a> </li> </ul> </div></div>';
+                            return html;
+                        }
+                    }
+                ]
+            });
+        }
+
+
+        function BindDetailsDataTable(data) {
+            if (dtOrderDetails != null)
+                dtOrderDetails.destroy();
+            dtOrderDetails = $('#dtOrderDetails').DataTable({
+                dom: "<'row'<'col-sm-12'tr>>",
+                data: data,
+                order: false,
+                autoWidth: false,
+                pageLength: 9,
+                rowId: "OrderDetailId",
+                columns: [
+                    {
+                        data: "ProductName",
+                        "orderable": false,
+                        class: "no-sort text-truncate",
+                        "searchable": false,
+                        render: function (data, type, row, meta) {
+                            return '<div class="text-primary">' + row.ProductName + '</div>';
+                        }
+                    },
+                    {
+                        //
+                        "searchable": false,
+                        data: "Quantity",
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '<button onclick="QuantityMinus(this)" type="button" class="btn btn-danger mr-2 icon-sm grid-quantity-control complete-restriction-hide"><i class="fas fa-minus"></i></button>' + row.Quantity + '<button onclick="QuantityAdd(this)" type="button" class="btn btn-primary ml-2 icon-sm grid-quantity-control complete-restriction-hide"><i class="fas fa-plus"></i></button>';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: "Price",
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return 'Rs.' + row.Price;
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '15%';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return row.AdditionalDiscount + '%';
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: "Amount",
+                        class: "no-sort",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return 'Rs.' + (row.Price - (row.Price * (0.15)) - (row.Price * (row.AdditionalDiscount / 100))) * row.Quantity;
+                        }
+                    },
+                    {
+                        "searchable": false,
+                        data: null,
+                        class: "no-sort text-center",
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return '<button onclick="RemoveFromDetails(this)" type="button" class="complete-restriction-hide squer-btn btn-outline danger-outline icon-sm"><i class="fas fa-trash"></i></button>';
+                        }
+                    }
+                ]
+            });
+
+            CalculateTotal();
+        }
+
+        function OpenNewModel() {
+
+        }
+
+        function EditItem(element) {
+
+        }
+
+        function AddPaymentMenuClick(element) {
+            var dataOrder = dtOrders.row($(element).parents('tr')).data();
+            SelectedOrderId = dataOrder.OrderId;
+            $('#PaymentOrderId').val(SelectedOrderId);
+            $('#PaymentType').val(2);
+            $('#PaymentAmount').val(0);
+            $('#modalPayment').modal('show');
+        }
+
+        function AddExpenseMenuClick(element) {
+            var dataOrder = dtOrders.row($(element).parents('tr')).data();
+            SelectedOrderId = dataOrder.OrderId;
+            $('#PaymentOrderId').val(SelectedOrderId);
+            $('#PaymentType').val(3);
+            $('#PaymentAmount').val(0);
+            $('#modalPayment').modal('show');
+        }
+
+        function DeleteItem(id) {
+            var host = window.location;
+            $.ajax({
+                url: host.protocol + "//" + host.host + '/Order/Delete?id=' + id,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                success: function (json) {
+                    LoadAll();
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+        function SaveItem() {
+
+        }
+
+        function AddPayment() {
+            $('#modalPayment').modal('hide');
+            var SelectedOrderId=$('#PaymentOrderId').val();
+            var PaymentType =$('#PaymentType').val();
+            var PaymentAmount = $('#PaymentAmount').val();
+            if (PaymentAmount >= 0) {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: '/Order/AddPayment?OrderId=' + SelectedOrderId + '&Payment=' + PaymentAmount + '&PaymentType=' + PaymentType,
+                    success: function (data) {
+                        LoadAll();
+                    },
+                    error: function (result) {
+                    }
+                });
+            }
+        }
+
+        function CheckRequired($element) {
+            var $form = $element;
+
+            if ($form.find('.required').filter(function () { return this.value === '' }).length > 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function ViewDetails(element) {
+            var dataOrder = dtOrders.row($(element).parents('tr')).data();
+            SelectedOrderId = dataOrder.OrderId;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/OrderDetail/GetByOrder?OrderId=' + dataOrder.OrderId,
+                success: function (data) {
+                    BindDetailsDataTable(data);
+                    if (dataOrder.Status == 4) {
+                        $('#updateDetailBtn').addClass('hide');
+                        $('#exampleModalLong').addClass('complete');
+                    }
+                    else if(dataOrder.Status == 2) {
+                        $('#updateDetailBtn').addClass('hide');
+                        
+                    }
+                    else {
+
+                        $('#updateDetailBtn').removeClass('hide');
+                        $('#exampleModalLong').removeClass('complete');
+                    }
+                    $('#exampleModalLong').modal('show');
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function PrintReciept(element) {
+            var dataOrder = dtOrders.row($(element).parents('tr')).data();
+            $('#recTo').html(dataOrder.UserName);
+            $('#recAddress').html(dataOrder.BillingAddress);
+            $('#recNumber').html(dataOrder.OrderId);
+            if (dataOrder.CreatedAt != null) {
+                var dateOriginal = new Date(dataOrder.CreatedAt);
+                var formattedDate = moment(dateOriginal).format('DD MMM YYYY');
+                $('#recDate').html(formattedDate);
+            }
+            SelectedOrderId = dataOrder.OrderId;
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/OrderDetail/GetByOrder?OrderId=' + dataOrder.OrderId,
+                success: function (data) {
+                    $('#singleOrderDetails').empty();
+                    var total = 0;
+                    var totalOriginal = 0;
+                    var index = 0;
+                    if (data != null && data.length > 0) {
+                        data.forEach((element) => {
+                            index++;
+                            total += (element.Price - (element.Price * (0.15)) - (element.Price * (element.AdditionalDiscount / 100))) * element.Quantity;
+                            totalOriginal += element.Price * element.Quantity;
+                            //var html = '<div class="row mb-2 mb-sm-0 py-25"> <div class="col-1">' + index + '</div> <div class="col-3">' + element.ProductName + '</div> <div class="col-2">' + element.Quantity + '</div> <div class="col-2">Rs. ' + element.Price + '</div> <div class="col-1">15%</div> <div class="col-1">' + element.AdditionalDiscount + '%</div> <div class="col-2">Rs. ' + (element.Price - (element.Price * (0.15)) - (element.Price * (element.AdditionalDiscount / 100))) * element.Quantity + '</div> </div>';
+                            var html = '<tr> <td class="ps-2">' + index + '</td> <td>' + element.ProductName + '</td> <td>' + element.Quantity + '</td> <td>BQ004</td> <td>' + element.Price + '</td><td>' + (element.Price * element.Quantity) + '</td> <td>15%</td> <td>' + element.AdditionalDiscount + '%</td> <td class="pe-2">' + (element.Price - (element.Price * (0.15)) - (element.Price * (element.AdditionalDiscount / 100))) * element.Quantity + '</td> </tr>';
+                            $('#singleOrderDetails').append(html);
+                        });
+                        $('.total').html(total.toFixed(2));
+                        var priceText = CurranyTransform(total.toFixed(2))
+                        $('.priceText').html(priceText);
+                        $('.totalOriginal').html(totalOriginal.toFixed(2));
+                        PrintSingle();
+                    }
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function CalculateTotal() {
+            var total = 0;
+            var form_data = dtOrderDetails.rows().data().toArray();
+            form_data.forEach((row) => {
+                total += (row.Price - (row.Price * (0.15)) - (row.Price * (row.AdditionalDiscount / 100))) * row.Quantity;
+            });
+            $('#totalAmount').html(total.toFixed(1));
+        }
+
+        function QuantityMinus(element) {
+            var data = dtOrderDetails.row($(element).parents('tr')).data();
+            if (data.Quantity > 0) {
+                data.Quantity--;
+            }
+            dtOrderDetails.row('#' + data.OrderDetailId)
+                .data(data)
+                .draw();
+            CalculateTotal();
+        }
+
+        function QuantityAdd(element) {
+            var data = dtOrderDetails.row($(element).parents('tr')).data();
+            data.Quantity++;
+            dtOrderDetails.row('#' + data.OrderDetailId)
+                .data(data)
+                .draw();
+            CalculateTotal();
+        }
+
+        function RemoveFromDetails(element) {
+            var data = dtOrderDetails.row($(element).parents('tr')).data();
+            dtOrderDetails.row('#' + data.OrderDetailId).remove().draw();
+            CalculateTotal();
+        }
+
+        function UpdateOrderStatus(element, status) {
+            var dataOrder = dtOrders.row($(element).parents('tr')).data();
+            dataOrder.Status = status;
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Order/UpdateStatus?OrderId=' + dataOrder.OrderId + '&&Status=' + dataOrder.Status,
+                success: function (data) {
+                    if (data == true) {
+                        if (dataOrder.Status == 4) {
+                            putCoins(dataOrder); 
+                        }
+                        dtOrders.row('#' + dataOrder.OrderId)
+                            .data(dataOrder)
+                            .draw();
+                    }
+                },
+                error: function (result) {
+                }
+            });
+
+        }
+
+         function UpdateOrderStatusOnBulkPrint(dataOrder) {
+             
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: '/Order/UpdateStatus?OrderId=' + dataOrder.OrderId + '&&Status=2',
+                success: function (data) {
+                    if (data == true) {
+                        dataOrder.Status = 2;
+                        dtOrders.row('#' + dataOrder.OrderId)
+                            .data(dataOrder)
+                            .draw();
+                    }
+                },
+                error: function (result) {
+                }
+            });
+        }
+        function putCoins(order) {
+            if (order.TotalAmount >= 1000) {
+                var coins=Math.floor(order.TotalAmount / 1000) * 10;
+                alert(coins+"  added");
+            }
+        }
+        function UpdateOrderDetails() {
+            var form_data = dtOrderDetails.rows().data().toArray();
+            data = { 'OrderId': SelectedOrderId, 'Details': form_data };
+
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/OrderDetail/SaveBulk',
+                data: JSON.stringify(data),
+                success: function () {
+                    $('#exampleModalLong').modal('show');
+                },
+                failure: function (response) {
+                    $('#result').html(response);
+                }
+            });
+        }
+
+        function BulkPrintClick() {
+            listOrderIds = [];
+            var checkedItems = dtOrders.$('input[type="checkbox"]:checked').each(function () {
+                var dataOrder = dtOrders.row($(this).parents('tr')).data();
+                listOrderIds.push(dataOrder.OrderId);
+                UpdateOrderStatusOnBulkPrint(dataOrder);
+            });
+            OrderIdList = JSON.stringify(listOrderIds);
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                data: OrderIdList,
+                url: '/OrderDetail/GetByOrderIds',
+                success: function (data) {
+                    $('#orderProductList').empty();
+                    if (data != null && data.length > 0) {
+                        var index = 0;
+                        data.forEach((element) => {
+                            index++;
+                            //var html = '<div class="row mb-2 mb-sm-0 py-25"> <div class="col-1">' + index + '</div> <div class="col-8">' + element.ProductName + '</div> <div class="col-3 text-secondary-d2">' + element.Quantity + '</div> </div>';
+                            var html = '<tr> <td class="ps-2">' + index + '</td> <td>' + element.ProductName + '</td> <td>' + element.Quantity + '</td></tr>';
+                            $('#orderProductList').append(html);
+                        });
+                        
+                        
+                        PrintBulk();
+                    }
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        async function PrintBulk() {
+            const element = document.getElementById("invoice-POS");
+            const rect = element.getBoundingClientRect();
+            var opt = {
+                margin: 0.5,
+                filename: 'your_filename.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2, logging: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'A4' }
+            };
+
+            const blob = await window.html2pdf().set(opt).from(element).outputPdf('blob', 'my-invoice.pdf');
+            var url = URL.createObjectURL(blob);
+            iframe = document.getElementById('printf');
+
+            iframe.style.display = 'none';
+            iframe.src = url;
+            iframe.onload = function () {
+                setTimeout(function () {
+                    iframe.focus();
+                    iframe.contentWindow.print();
+                }, 1);
+            };
+
+
+        }
+        async function PrintSingle() {
+            const element = document.getElementById("invoiceTemplate");
+            const rect = element.getBoundingClientRect();
+            var filename = "file_" + Math.random() + ".pdf";
+            var opt = {
+                margin: [0, 0, 2, 0],
+                pageBreak: { mode: 'css', before: '#nextpage1' },
+                filename: filename,
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2, logging: true, scrollY: 0 },
+                jsPDF: { unit: 'in', format: 'A4' }
+            };
+
+            const blob = await window.html2pdf().set(opt).from(element).outputPdf('blob', filename);
+            var url = URL.createObjectURL(blob);
+            iframe = $('iframe')[0];
+            $('body').append(iframe);
+
+            iframe.style.display = 'none';
+            iframe.src = url;
+            iframe.onload = function () {
+                setTimeout(function () {
+                    iframe.focus();
+                    iframe.contentWindow.print();
+                    setTimeout(function () {
+                        //$(iframe).remove();
+                    }, 3000);
+                }, 1);
+            };
+
+
+        }
+
+    </script>
+}
